@@ -21,13 +21,14 @@ module.exports = function(sequelize, DataTypes) {
                 len: [5, 20]
             }
         },
-        admin: {
-            type: DataTypes.BOOLEAN,
-            allowNull: false,
-        },
-        shipping: {
-            type: DataTypes.BOOLEAN,
-            allowNull: true,
+        {
+            underscored: true,
+            freezeTableName: true,
+            classMethods: {
+                associate: function(models) {
+                    User.belongsToMany(models.Order, { through: 'Shipped', foreignKey: 'order_id' });
+                }
+            }
         }
     });
 

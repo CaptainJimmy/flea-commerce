@@ -62,19 +62,25 @@ module.exports = function(sequelize, DataTypes) {
         date_shipped: {
             type: DataTypes.DATE,
             allowNull: true
+        },
+        shipped_by: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
+        {
+            underscored: true,
+            freezeTableName: true,
+            classMethods: {
+                associate: function(models) {
+                    Order.belongsTo(models.Customer, { foreignKey: 'customer_id' });
+                    Order.hasMany(models.Product, { foreignKey: 'order_id' });
+                    Order.hasOne(model.User, { through: 'Shipped', foreignKey: 'order_id' });
+                }
+            }
         }
+
     });
 
-    //need help with this
-    Order.hasOne(Customer, { as: 'username', foreignKey: 'username' })
-    Order.associate = function(models) {
-        // NEED HELP WITH THIS
-        Order(models.Customer, {
-                foreignKey: past_orders
-                targetKey: order_number
-            }
-        });
-};
 
-return Order;
+    return Order;
 };

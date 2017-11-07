@@ -65,11 +65,21 @@ module.exports = function(sequelize, DataTypes) {
         past_orders: {
             type: DataTypes.STRING,
             allowNull: true,
+        },
+        {
+            underscored: true,
+            freezeTableName: true,
+            classMethods: {
+                associate: function(models) {
+                    Customer.hasMany(models.Order, { foreignKey: 'customer_order_id' });
+
+                }
+            }
         }
+
+
     });
-    Customer.associate = function(models) {
-        Customer.hasMany(models.Orders);
-    };
+
 
     return Customer;
 };
