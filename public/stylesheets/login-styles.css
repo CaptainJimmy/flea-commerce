@@ -1,0 +1,101 @@
+ @import url('https://fonts.googleapis.com/css?family=Alfa+Slab+One');
+ html {
+     position: relative;
+     min-height: 100%;
+ }
+
+ body {
+     font-family: 'Alfa Slab One', cursive;
+     background: #6FB98F;
+     /* fallback for old browsers */
+     background: -webkit-linear-gradient(to right, #e3ffc0, #6FB98F);
+     /* Chrome 10-25, Safari 5.1-6 */
+     background: linear-gradient(to right, #e3ffc0, #6FB98F);
+     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+     margin-bottom: 60px;
+     padding-top: 40px;
+     padding-bottom: 40px;
+     background-color: #eee;
+ }
+
+ .header {
+     position: absolute;
+     top: 0;
+     width: 100%;
+     height: 60px;
+     line-height: 60px;
+     background-color: #2C7873;
+ }
+
+ .icon {
+     margin-right: 5px;
+     padding: 3px;
+     color: #eee;
+     text-align: right;
+ }
+
+ .icons {
+     float: right;
+     margin-top: 5px;
+ }
+
+ .form-signin {
+     max-width: 330px;
+     padding: 15px;
+     margin: 0 auto;
+ }
+
+ .form-signin .form-signin-heading,
+ .form-signin .checkbox {
+     margin-bottom: 10px;
+ }
+
+ .form-signin .checkbox {
+     font-weight: 400;
+ }
+
+ .form-signin .form-control {
+     position: relative;
+     box-sizing: border-box;
+     height: auto;
+     padding: 10px;
+     font-size: 16px;
+ }
+
+ .form-signin .form-control:focus {
+     z-index: 2;
+ }
+
+ .form-signin input[type="email"] {
+     margin-bottom: -1px;
+     border-bottom-right-radius: 0;
+     border-bottom-left-radius: 0;
+ }
+
+ .form-signin input[type="password"] {
+     margin-bottom: 10px;
+     border-top-left-radius: 0;
+     border-top-right-radius: 0;
+ }
+
+ .footer {
+     position: absolute;
+     bottom: 0;
+     width: 100%;
+     height: 60px;
+     line-height: 60px;
+     background-color: #2C7873;
+ }
+
+ body>.container-fluid {
+     padding: 60px 15px 0;
+ }
+
+ .footer>.container-fluid {
+     padding-right: 15px;
+     padding-left: 15px;
+ }
+
+ code {
+     font-size: 80%;
+ }
