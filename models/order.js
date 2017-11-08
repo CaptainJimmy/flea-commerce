@@ -1,9 +1,9 @@
 module.exports = function(sequelize, DataTypes) {
     var Order = sequelize.define("Order", {
         order_number: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.UUID,
             allowNull: false,
-            autoIncrement: true
+            defaultValue: sequelize.UUIDV4
         },
         items: {
             type: DataTypes.STRING,
@@ -66,16 +66,15 @@ module.exports = function(sequelize, DataTypes) {
         shipped_by: {
             type: DataTypes.STRING,
             allowNull: true
-        },
-        {
-            underscored: true,
-            freezeTableName: true,
-            classMethods: {
-                associate: function(models) {
-                    Order.belongsTo(models.Customer, { foreignKey: 'customer_id' });
-                    Order.hasMany(models.Product, { foreignKey: 'order_id' });
-                    Order.hasOne(model.User, { through: 'Shipped', foreignKey: 'order_id' });
-                }
+        }
+    }, {
+        underscored: true,
+        freezeTableName: true,
+        classMethods: {
+            associate: function(models) {
+                Order.belongsTo(models.Customer, { foreignKey: 'customer_id' });
+                Order.hasMany(models.Product, { foreignKey: 'order_id' });
+                Order.hasOne(model.User, { through: 'Shipped', foreignKey: 'order_id' });
             }
         }
 
