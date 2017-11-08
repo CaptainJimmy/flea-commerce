@@ -19,10 +19,6 @@ module.exports = function(sequelize, DataTypes) {
         image: {
             type: DataTypes.STRING,
             allowNull: true
-        },
-        related_products: {
-            type: DataTypes.STRING,
-            allowNull: true
         }
     });
     return Product;
