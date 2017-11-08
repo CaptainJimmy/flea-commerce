@@ -6,11 +6,11 @@
 
  body {
      font-family: 'Alfa Slab One', cursive;
-     background: #c94b4b;
+     background: #6FB98F;
      /* fallback for old browsers */
-     background: -webkit-linear-gradient(to right, #4b134f, #c94b4b);
+     background: -webkit-linear-gradient(to right, #e3ffc0, #6FB98F);
      /* Chrome 10-25, Safari 5.1-6 */
-     background: linear-gradient(to right, #4b134f, #c94b4b);
+     background: linear-gradient(to right, #e3ffc0, #6FB98F);
      /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
      margin-bottom: 60px;
      padding-top: 40px;
@@ -24,15 +24,7 @@
      width: 100%;
      height: 60px;
      line-height: 60px;
-     background-color: #303030;
- }
-
- .container-fluid {
-     margin-top: -2px;
- }
-
- .jumbotron {
-     margin-top: 125px;
+     background-color: #2C7873;
  }
 
  .icon {
@@ -92,7 +84,7 @@
      width: 100%;
      height: 60px;
      line-height: 60px;
-     background-color: #303030;
+     background-color: #2C7873;
  }
 
  body>.container-fluid {

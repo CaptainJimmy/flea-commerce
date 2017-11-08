@@ -4,8 +4,7 @@ block content
     header
     .header
     .container
-        a.navbar-brand(href='./')
-        | FleaCommerce
+        a.navbar-brand(href='./')| FleaCommerce
     |     
     .container
     form.form-signin
@@ -24,14 +23,13 @@ block content
             input(type='checkbox', value='remember-me')
             |  Remember me
         |             
-        button.btn.btn-lg.btn-primary.btn-block(type='submit') Sign in
+        button.btn.btn-lg.btn-success.btn-block(type='submit') Sign in
     // /container
     footer.footer
-    .container
-        a.navbar-brand(href='http://wrainaud.com/')
+    .container-fluid
+        a.navbar-brand(href='http://wrainaud.com/') FleaCommerce
         i.fa.fa-copyright.fa-lg
-        |  FleaCommerce
-        |             
+        |       
         .icons
         a.icon(href='https://github.com/CaptainJimmy/flea-commerce/')
             i.fa.fa-github.fa-lg
