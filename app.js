@@ -27,7 +27,7 @@ app.use('/', index);
 app.use('/user', user);
 app.use('/customer', customer);
 
-
+var authRoute = require("./routes/auth.js")(app);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
