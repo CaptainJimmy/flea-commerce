@@ -30,9 +30,9 @@ router.post("/create", passport.authenticate('local-signup', {
 }));
 
 router.get("/logout", (req, res) => {
-            req.session.destroy(function(err) {
-                res.redirect("/");
-            });
-        };
+    req.session.destroy(function(err) {
+        res.redirect("/");
+    });
+});
 
-        module.exports = router;
+module.exports = router;
