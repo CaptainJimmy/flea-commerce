@@ -25,6 +25,13 @@ build/Release
 # Dependency directory
 # https://docs.npmjs.com/cli/shrinkwrap#caveats
 node_modules
+config/config.json
+config/*
+./config/*
+<<<<<<< HEAD
+
+=======
+>>>>>>> dece0d26c5a94cfcdb09e2cbad0d23480e038a93
 
 # Debug log from npm
 npm-debug.log
