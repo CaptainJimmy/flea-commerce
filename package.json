@@ -18,5 +18,18 @@
     "sequelize": "^4.22.5",
     "sequelize-cli": "^3.0.0",
     "serve-favicon": "~2.4.5"
-  }
+  },
+  "description": "A Node/Express/Mysql E-Commerce Plugin Site",
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CaptainJimmy/flea-commerce.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CaptainJimmy/flea-commerce/issues"
+  },
+  "homepage": "https://github.com/CaptainJimmy/flea-commerce#readme"
 }
