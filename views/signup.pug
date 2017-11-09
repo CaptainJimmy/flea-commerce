@@ -1,26 +1,35 @@
 extends layout
 
 block content
-    form.form-login(method="post",action="/user/create")
-        h2.form-signin-heading Create a new user      
-        label.sr-only(for='customer-name') Your Full name
-        input#customer-name.form-control(type="text", placeholder="Your full name",name="customer_name",required='')
-        label.sr-only(for='username') Your Full name
-        input#username.form-control(type="text", placeholder="Username",name="username",required='')       
-        label.sr-only(for='inputEmail') Email address       
-        input#inputEmail.form-control(type='email', placeholder='Email address', required='', autofocus='')       
-        label.sr-only(for='inputPassword') Choose a Password       
-        input#inputPassword.form-control(type='password', placeholder='Password', required='')
-        label.sr-only(for='address1') Address
-        input#username.form-control(type="text", placeholder="Address 1",name="address1" required='')
-        label.sr-only(for='address2') Address 2 (optional)
-        input#username.form-control(type="text", placeholder="Address 2",name="address2" )
-        label.sr-only(for='city') City
-        input#username.form-control(type="text", placeholder="City",name="city" required='')   
-        label.sr-only(for='state') State
-        input#username.form-control(type="text", placeholder="State",name="state" required='')   
-        label.sr-only(for='zip') Zip Code
-        input#username.form-control(type="text", placeholder="Zip",name="zip" required='')    
-        input#remember-me.checkbox(type='checkbox', value='remember-me') 
-        label(for="remember-me") Remember me
-        button.btn.btn-lg.btn-success.btn-block(type='submit') Sign in
+    div.container#signup-main
+        .container-fluid
+            h2.form-signin-heading Create a new user
+            form.form-login#signup-form(method="post",action="/user/create")
+                .form-control     
+                    label.sr-only(for='customer-name') Your Full name
+                    input#customer-name.form-control(type="text", placeholder="Your full name",name="customer_name",required='')
+                .form-control
+                    label.sr-only(for='username') Your Full name
+                    input#username.form-control(type="text", placeholder="Username",name="username",required='')       
+                .form-control
+                    label.sr-only(for='inputEmail') Email address       
+                    input#inputEmail.form-control(type='email', placeholder='Email address', required='', autofocus='')       
+                .form-control
+                    label.sr-only(for='inputPassword') Choose a Password       
+                    input#inputPassword.form-control(type='password', placeholder='Password', required='')
+                .form-control
+                    label.sr-only(for='address1') Address
+                    input#username.form-control(type="text", placeholder="Address 1",name="address1" required='')
+                .form-control
+                    label.sr-only(for='address2') Address 2 (optional)
+                    input#username.form-control(type="text", placeholder="Address 2",name="address2" )
+                .form-control
+                    label.sr-only(for='city') City
+                    input#username.form-control(type="text", placeholder="City",name="city" required='')   
+                .form-control
+                    label.sr-only(for='state') State
+                    input#username.form-control(type="text", placeholder="State",name="state" required='')   
+                .form-control
+                    label.sr-only(for='zip') Zip Code
+                    input#username.form-control(type="text", placeholder="Zip",name="zip" required='')    
+                    button.btn.btn-lg.btn-success(type='submit') Register
