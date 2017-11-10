@@ -5,24 +5,9 @@ const graph = require('fbgraph');
 const LastFmNode = require('lastfm').LastFmNode;
 const tumblr = require('tumblr.js');
 const GitHub = require('github');
-const Twit = require('twit');
-const stripe = require('stripe')(process.env.STRIPE_SKEY);
-const twilio = require('twilio')(process.env.TWILIO_SID, process.env.TWILIO_TOKEN);
-const Linkedin = require('node-linkedin')(process.env.LINKEDIN_ID, process.env.LINKEDIN_SECRET, process.env.LINKEDIN_CALLBACK_URL);
 const clockwork = require('clockwork')({ key: process.env.CLOCKWORK_KEY });
 const paypal = require('paypal-rest-sdk');
 const lob = require('lob')(process.env.LOB_KEY);
-const ig = bluebird.promisifyAll(require('instagram-node').instagram());
-const foursquare = require('node-foursquare')({
-  secrets: {
-    clientId: process.env.FOURSQUARE_ID,
-    clientSecret: process.env.FOURSQUARE_SECRET,
-    redirectUrl: process.env.FOURSQUARE_REDIRECT_URL
-  }
-});
-
-foursquare.Venues = bluebird.promisifyAll(foursquare.Venues);
-foursquare.Users = bluebird.promisifyAll(foursquare.Users);
 
 /**
  * GET /api
@@ -31,66 +16,6 @@ foursquare.Users = bluebird.promisifyAll(foursquare.Users);
 exports.getApi = (req, res) => {
   res.render('api/index', {
     title: 'API Examples'
-  });
-};
-
-/**
- * GET /api/foursquare
- * Foursquare API example.
- */
-exports.getFoursquare = (req, res, next) => {
-  const token = req.user.tokens.find(token => token.kind === 'foursquare');
-  Promise.all([
-    foursquare.Venues.getTrendingAsync('40.7222756', '-74.0022724', { limit: 50 }, token.accessToken),
-    foursquare.Venues.getVenueAsync('49da74aef964a5208b5e1fe3', token.accessToken),
-    foursquare.Users.getCheckinsAsync('self', null, token.accessToken)
-  ])
-  .then(([trendingVenues, venueDetail, userCheckins]) => {
-    res.render('api/foursquare', {
-      title: 'Foursquare API',
-      trendingVenues,
-      venueDetail,
-      userCheckins
-    });
-  })
-  .catch(next);
-};
-
-/**
- * GET /api/tumblr
- * Tumblr API example.
- */
-exports.getTumblr = (req, res, next) => {
-  const token = req.user.tokens.find(token => token.kind === 'tumblr');
-  const client = tumblr.createClient({
-    consumer_key: process.env.TUMBLR_KEY,
-    consumer_secret: process.env.TUMBLR_SECRET,
-    token: token.accessToken,
-    token_secret: token.tokenSecret
-  });
-  client.posts('mmosdotcom.tumblr.com', { type: 'photo' }, (err, data) => {
-    if (err) { return next(err); }
-    res.render('api/tumblr', {
-      title: 'Tumblr API',
-      blog: data.blog,
-      photoset: data.posts[0].photos
-    });
-  });
-};
-
-/**
- * GET /api/facebook
- * Facebook API example.
- */
-exports.getFacebook = (req, res, next) => {
-  const token = req.user.tokens.find(token => token.kind === 'facebook');
-  graph.setAccessToken(token.accessToken);
-  graph.get(`${req.user.facebook}?fields=id,name,email,first_name,last_name,gender,link,locale,timezone`, (err, results) => {
-    if (err) { return next(err); }
-    res.render('api/facebook', {
-      title: 'Facebook API',
-      profile: results
-    });
   });
 };
 
