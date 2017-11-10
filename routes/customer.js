@@ -16,7 +16,6 @@ router.get('/login', (req, res, next) => {
 
 router.post('/authenticate', passport.authenticate('local-signin', {
     successRedirect: '/dashboard',
-
     failureRedirect: '/login'
 }));
 
@@ -25,7 +24,6 @@ router.get("/signup", function(req, res, next) {
 });
 router.post("/create", passport.authenticate('local-signup', {
     successRedirect: '/dashboard',
-
     failureRedirect: '/signup'
 }));
 

@@ -1,7 +1,7 @@
 extends layout
 
 block content
-    form.form-signin(method="post".action="/users/authenticate")
+    form.form-signin(method="post".action="/customer/authenticate")
         h2.form-signin-heading Please sign in       
         label.sr-only(for='inputEmail') Email address       
         input#inputEmail.form-control(type='email', placeholder='Email address', name="email",required='', autofocus='')       
