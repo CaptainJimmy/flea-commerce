@@ -36,7 +36,6 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
-                is: ["^[a-z]+$", 'i'],
                 len: [2, 2]
             }
         },
@@ -44,7 +43,6 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
-                not: ["[a-z]", 'i'],
                 len: [5, 5]
             }
         },
@@ -68,14 +66,13 @@ module.exports = function(sequelize, DataTypes) {
         }
     }, {
         underscored: true,
-        freezeTableName: true,
-        classMethods: {
-            associate: function(models) {
-                Customer.hasMany(models.Order, { foreignKey: 'customer_order_id' });
-            }
-        }
-    });
+        freezeTableName: true
+    })
 
 
+
+    Customer.associate = function(models) {
+        Customer.hasMany(models.Order, { foreignKey: 'customer_order_id' });
+    }
     return Customer;
 };
