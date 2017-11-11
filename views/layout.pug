@@ -10,28 +10,36 @@ html
     // Bootstrap core CSS
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css')    
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')
-    link(rel='stylesheet', href='/stylesheets/login-styles.css')
-    noscript
-        | For full functionality of this site it is necessary to enable JavaScript.
-        | Here are the &lt;a href="http://www.enable-javascript.com/" target="_blank"&gt;
-        | instructions how to enable JavaScript in your web browser&lt;/a&gt;.
-  body
-    nav.navbar.navbar-default
-      .container-fluid
-        .navbar-header
-          a.navbar-brand(href='./') FleaCommerce 
+    link(rel='stylesheet', href='/public/stylesheets/styles.css')
+    script(src='https://use.fontawesome.com/2c451e67ab.js')
+   body
+    nav.navbar.navbar-expand-lg.mb-4.top-bar.navbar-static-top.sps.sps--abv
+      .container
+        button.navbar-toggler.navbar-toggler-right(type='button', data-toggle='collapse', data-target='#navbarCollapse1', aria-controls='navbarCollapse', aria-expanded='false', aria-label='Toggle navigation')
+          span.navbar-toggler-icon    
+        a.navbar-brand.mx-auto(href='#')
+          img(src='flea-logo.png', style='max-width: 40px', ;='')
+          span flea-Commerce
+        #navbarCollapse1.collapse.navbar-collapse
+          ul.navbar-nav.ml-auto
+            li.nav-item
+              a.nav-link(href='#myCarousel') Home  
+            li.nav-item.active
+              a.nav-link(href='#benefits')
+                span.sr-only (current)       
+            li.nav-item
+              a.nav-link(href='#about') Shopping Cart      
+            li.nav-item
+              a.nav-link(href='#blog') Contact Us
     .container
       block content
 
-    footer.footer
-      .container-fluid
-        a.navbar-brand(href='http://wrainaud.com/') FleaCommerce
-          i.fa.fa-copyright.fa-lg
-            .icons
-              a.icon(href='https://github.com/CaptainJimmy/flea-commerce/')
-                i.fa.fa-github.fa-lg
-              a.icon(href='http://herokublows.com/')
-                i.fa.fa-address-card-o.fa-lg
-    script(src='https://code.jquery.com/jquery-3.2.1.slim.min.js', integrity='sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN', crossorigin='anonymous')
-    script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js', integrity='sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh', crossorigin='anonymous')
-    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js', integrity='sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ', crossorigin='anonymous')
+  section.action-sec
+      .container
+        .action-box.text-center
+          h2
+            img(src='flea-logo.png', style='max-width: 30px', ;='') flea-Commerce
+    script(src='https://code.jquery.com/jquery-3.2.1.slim.min.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js')
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js')
+    script(src='/public/js/app2.js')

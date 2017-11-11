@@ -1,43 +1,6 @@
-doctype html
-html(lang='en')
-  head
-    meta(charset='UTF-8')
-    |   
-    title Another Landing
-    |   
-    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
-    |   
-    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css')
-    |   
-    link(rel='stylesheet', href='/public/stylesheets/styles.css')
-    |   
-    script(src='https://use.fontawesome.com/2c451e67ab.js')
-  body
-    nav.navbar.navbar-expand-lg.mb-4.top-bar.navbar-static-top.sps.sps--abv
-      .container
-        button.navbar-toggler.navbar-toggler-right(type='button', data-toggle='collapse', data-target='#navbarCollapse1', aria-controls='navbarCollapse', aria-expanded='false', aria-label='Toggle navigation')
-          span.navbar-toggler-icon
-        |       
-        a.navbar-brand.mx-auto(href='#')
-          img(src='flea-logo.png', style='max-width: 40px', ;='')
-          span flea
-          | -Commerce
-        |       
-        #navbarCollapse1.collapse.navbar-collapse
-          ul.navbar-nav.ml-auto
-            li.nav-item.active
-              a.nav-link(href='#myCarousel')
-                | Home 
-                span.sr-only (current)
-            |           
-            li.nav-item
-              a.nav-link(href='#') Shop
-            |           
-            li.nav-item
-              a.nav-link(href='#') About Us
-            |           
-            li.nav-item
-              a.nav-link(href='#') Contact Us
+extends layout
+
+block content
     // Slider main container
     #myCarousel.swiper-container.main-slider
       .swiper-wrapper
@@ -160,19 +123,3 @@ html(lang='en')
             |           
             p
               a.btn.btn-transparent-white(href='#') Shop Now
-    |   
-    section.action-sec
-      .container
-        .action-box.text-center
-          h2
-            img(src='flea-logo.png', style='max-width: 30px', ;='')
-            |  flea-Commerce
-    |       
-    |   
-    script(src='https://code.jquery.com/jquery-3.2.1.slim.min.js')
-    |   
-    script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js')
-    |   
-    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js')
-    |   
-    script(src='/public/app2.js')

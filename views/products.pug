@@ -1,43 +1,6 @@
-doctype html
-html(lang='en')
-  head
-    meta(charset='UTF-8')
-    |   
-    title Another Landing
-    |   
-    link(href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css', rel='stylesheet')
-    |   
-    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css')
-    |   
-    link(rel='stylesheet', href='/public/stylesheets/styles.css')
-    |   
-    script(src='https://use.fontawesome.com/2c451e67ab.js')
-  body
-    nav.navbar.navbar-expand-lg.mb-4.top-bar.navbar-static-top.sps.sps--abv
-      .container
-        button.navbar-toggler.navbar-toggler-right(type='button', data-toggle='collapse', data-target='#navbarCollapse1', aria-controls='navbarCollapse', aria-expanded='false', aria-label='Toggle navigation')
-          span.navbar-toggler-icon
-        |       
-        a.navbar-brand.mx-auto(href='#')
-          img(src='flea-logo.png', style='max-width: 40px', ;='')
-          span flea
-          | -Commerce
-        |       
-        #navbarCollapse1.collapse.navbar-collapse
-          ul.navbar-nav.ml-auto
-            li.nav-item
-              a.nav-link(href='#myCarousel') Home
-            |           
-            li.nav-item.active
-              a.nav-link(href='#')
-                | Shop
-                span.sr-only (current)
-            |           
-            li.nav-item
-              a.nav-link(href='#') Shopping Cart
-            |           
-            li.nav-item
-              a.nav-link(href='#') Contact Us
+extends layout
+
+block content
     // my insertion of featured products
     .container.container.mt-4.mb-5(style='margin-top: 80px;')
       h3.display-4.text-center  Products 
@@ -220,19 +183,3 @@ html(lang='en')
             |           
             p
               a.btn.btn-transparent-white(href='#') Shop Now
-    |   
-    section.action-sec
-      .container
-        .action-box.text-center
-          h2
-            img(src='flea-logo.png', style='max-width: 30px', ;='')
-            | flea-Commerce
-    |       
-    |   
-    script(src='https://code.jquery.com/jquery-3.2.1.slim.min.js')
-    |   
-    script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js')
-    |   
-    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js')
-    |   
-    script(src='/public/js/app2.js')
