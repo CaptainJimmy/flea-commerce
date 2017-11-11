@@ -1,0 +1,222 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='UTF-8')
+    |   
+    title Another Landing
+    |   
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
+    |   
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css')
+    |   
+    link(rel='stylesheet', href='/public/stylesheets/styles.css')
+    |   
+    script(src='https://use.fontawesome.com/2c451e67ab.js')
+  body
+    nav.navbar.navbar-expand-lg.mb-4.top-bar.navbar-static-top.sps.sps--abv
+      .container
+        button.navbar-toggler.navbar-toggler-right(type='button', data-toggle='collapse', data-target='#navbarCollapse1', aria-controls='navbarCollapse', aria-expanded='false', aria-label='Toggle navigation')
+          span.navbar-toggler-icon
+        |       
+        |       
+        a.navbar-brand.mx-auto(href='#')
+          img(src='flea-logo.png', style='max-width: 40px', ;='')
+          span flea
+          | -Commerce
+        |       
+        |       
+        #navbarCollapse1.collapse.navbar-collapse
+          ul.navbar-nav.ml-auto
+            li.nav-item
+              a.nav-link(href='#myCarousel') Home 
+            |           
+            li.nav-item.active
+              a.nav-link(href='#benefits')
+                | Shop 
+                span.sr-only (current)
+            |           
+            li.nav-item
+              a.nav-link(href='#about') Shopping Cart
+            |           
+            li.nav-item
+              a.nav-link(href='#blog') Contact Us
+    |   
+    .container
+      .jumbotron(style='margin-top: 100px; background-color: #fff; border: 1px solid #2C7873;')
+        .container
+          .row
+            .col-lg-5.col-xs-5.item-photo
+              img(src='https://dummyimage.com/300 x 500/c7c7c7/ffffff')
+            |                 
+            |           
+            .col-lg-7.col-xs-7(style='border:0px solid gray')
+              h3 Samsung Galaxy S4 I337 16GB 4G LTE Unlocked GSM Android Cell Phone
+              |     
+              |             
+              h5
+                | Sold by 
+                a(href='#', style='color:#6FB98F') Samsung
+              |         
+              |             
+              h6.title-price
+                small Price
+              |             
+              h3(style='margin-top:0px;') $99.99
+              |  
+              |                     
+              |               
+              .section(style='padding-bottom:20px;')
+                h6.title-attr
+                  small Quantity
+                |                     
+                |                   
+                |                   
+                div
+                  .btn-minus
+                    i.fa.fa-minus(aria-hidden='true')
+                  |                       
+                  input(value='1')
+                  |                       
+                  .btn-plus
+                    i.fa.fa-plus(aria-hidden='true')
+              |                 
+              |         
+              |               
+              .section
+                button.btn.btn-aqua
+                  i.fa.fa-shopping-cart(aria-hidden='true')
+                  |  Add to Cart
+                // h6><a href="#"><span class="glyphicon glyphicon-heart-empty" style="cursor:pointer;"></span> Agregar a lista de deseos</a></h6
+            // div class="col-lg-1"></div
+            .col-lg-12
+              h6 Product Details
+              |             
+              div(style='width:100%;border-top:1px solid #6FB98F')
+                p(style='padding:15px;')
+                  | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum, optio ipsa non impedit repellat odit voluptate, tenetur, illum ab aspernatur eos cumque. Molestias vitae placeat, itaque nisi similique voluptatibus odit?
+                  | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae sapiente, quia consequuntur. Eveniet nulla asperiores mollitia dolor, ullam, deserunt ipsam similique ut neque cupiditate odit esse, commodi labore illo quidem.
+                |                 
+                small
+                  ul
+                    li Lorem ipsum dolor sit amet atque eveniet quae!
+                    |                     
+                    li Consectetur adipisicing elit
+                    |                     
+                    li Nisi accusantium vel
+                    |                     
+                    li U voluptatibus placeat est suscipit maxime
+                    |                     
+                    li Soluta dolorem temporibus doloribus illo quisquam
+                    |                     
+                    li Atque eveniet quae
+                    |                     
+                    li Magnam harum eligendi distinctio
+            // div class="col-lg-1"></div
+        // jumbotron
+      // container
+    // my insertion of featured products
+    .container.container.mt-4.mb-5
+      h3.display-4.text-center  Similar Products 
+      |     
+      .row
+        .col-md-3
+          .card
+            img.card-img-top(src='https://dummyimage.com/350x250/c7c7c7/000.png', alt='Card image cap')
+            |           
+            .card-block.p-3
+              h4.card-title Product 1
+              |             
+              p.card-text
+                | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas quos aliquam sit molestias, eligendi, numquam officia aspernatur iure magni excepturi.
+              |             
+              a.btn.btn-aqua.mb-2(href='#')
+                i.fa.fa-bars(aria-hidden='true')
+                |  Product Details
+            // card block
+          // card
+        // col-md-3
+        .col-md-3
+          .card
+            img.card-img-top(src='https://dummyimage.com/350x250/c7c7c7/000.png', alt='Card image cap')
+            |           
+            .card-block.p-3
+              h4.card-title Product 2
+              |             
+              p.card-text
+                | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam itaque suscipit voluptates impedit consequuntur minus cupiditate voluptatibus qui amet excepturi, iure nihil neque sit rem perferendis.
+              |             
+              a.btn.btn-aqua.mb-2(href='#')
+                i.fa.fa-bars(aria-hidden='true')
+                |  Product Details
+            // card block
+          // card
+        // col-md-3
+        .col-md-3
+          .card
+            img.card-img-top(src='https://dummyimage.com/350x250/c7c7c7/000.png', alt='Card image cap')
+            |           
+            .card-block.p-3
+              h4.card-title Product 3
+              |             
+              p.card-text
+                | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Temporibus nihil corporis sint quisquam, sit nesciunt unde ab nemo ullam.
+              |             
+              a.btn.btn-aqua.mb-2(href='#')
+                i.fa.fa-bars(aria-hidden='true')
+                |  Product Details
+            // card block
+          // card
+        // col-md-3
+        .col-md-3
+          .card
+            img.card-img-top(src='https://dummyimage.com/350x250/c7c7c7/000.png', alt='Card image cap')
+            |           
+            .card-block.p-3
+              h4.card-title Product 4
+              |             
+              p.card-text
+                | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet nihil cum consequatur enim non itaque nemo ex, tempora beatae modi architecto iusto.
+              |             
+              a.btn.btn-aqua.mb-2(href='#')
+                i.fa.fa-bars(aria-hidden='true')
+                |  Product Details
+            // card block
+          // card
+        // col-md-3
+    |   
+    section#about.about-sec.parallax-section
+      .container
+        .row
+          .col-md-3
+            h2(style='margin-top: 0;')
+              img(src='flea-logo.png', style='max-width: 30px', ;='')
+              | Our Story
+          |       
+          |         
+          .col-md-4
+            p
+              | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur odit quisquam, illum est vitae qui fuga debitis laudantium expedita, quam omnis ipsa libero laborum officia necessitatibus quibusdam. Modi, rerum, dolorem.
+          |       
+          |         
+          .col-md-4
+            p
+              | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem consectetur ex id quasi rerum suscipit deleniti, unde adipisci dicta ducimus vel a quisquam eveniet fugit, velit ipsa saepe sunt ipsum?
+            |           
+            p
+              a.btn.btn-transparent-white(href='#') Shop Now
+    |   
+    section.action-sec
+      .container
+        .action-box.text-center
+          h2
+            img(src='flea-logo.png', style='max-width: 30px', ;='')
+            |  flea-Commerce
+    |       
+    |   
+    script(src='https://code.jquery.com/jquery-3.2.1.slim.min.js')
+    |   
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js')
+    |   
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js')
+    |   
+    script(src='/public/js/app2.js')
