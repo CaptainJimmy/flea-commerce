@@ -1,63 +1,26 @@
 extends layout
 
 block content
-    .container
-      .jumbotron(style='margin-top: 100px; background-color: #fff; border: 1px solid #2C7873;')
-        .container
-          .row
-            .col-md-12
-              form#add-product-form
-                h1.text-center Add A Product
-                |  &#x9;&#x9;&#x9;
-                |  &#x9;&#x9;&#x9;
-                .form-group
-                  label(for='product_name') Product Name
-                  |     &#x9;&#x9;  
-                  input#product_name.form-control(type='product_name', placeholder='Enter the Product Name as You Want Displayed')
-                |   &#x9;&#x9;&#x9;
-                .form-group
-                  label(for='photo_URL') Photo URL
-                  |        &#x9;&#x9;  
-                  input#photo_URL.form-control(type='photo_URL', placeholder='http://image.png')
-                |   &#x9;&#x9;&#x9;
-                .form-group
-                  label(for='sold_by') Seller
-                  |     &#x9;&#x9;  
-                  input#sold_by.form-control(type='sold_by', placeholder='seller name')
-                |   &#x9;&#x9;&#x9;
-                .form-group
-                  label(for='price') Price
-                  |     &#x9;&#x9;  
-                  input#product_price.form-control(type='price', placeholder='$00.00')
-                |   &#x9;&#x9;&#x9;
-                .form-group
-                  label(for='product_description') Product Details
-                  |     &#x9;&#x9;  
-                  textarea#product_description.form-control(rows='3')
-                |   &#x9;&#x9;&#x9;
-                .form-group
-                  label(for='product_name') Product Information Points
-                  |     &#x9;&#x9;  
-                  input#product_name.form-control(type='product_name', placeholder='Information Point 1', style='margin-bottom: 10px;')
-                  |     &#x9;&#x9;  
-                  input#product_name.form-control(type='product_name', placeholder='Information Point 2', style='margin-bottom: 10px;')
-                  |     &#x9;&#x9;  
-                  input#product_name.form-control(type='product_name', placeholder='Information Point 3', style='margin-bottom: 10px;')
-                  |     &#x9;&#x9;  
-                  input#product_name.form-control(type='product_name', placeholder='Information Point 4', style='margin-bottom: 10px;')
-                  |     &#x9;&#x9;  
-                  input#product_name.form-control(type='product_name', placeholder='Information Point 5', style='margin-bottom: 10px;')
-                  |     &#x9;&#x9;  
-                  input#product_name.form-control(type='product_name', placeholder='Information Point 6', style='margin-bottom: 10px;')
-                  |     &#x9;&#x9;  
-                  input#product_name.form-control(type='product_name', placeholder='Information Point 7', style='margin-bottom: 10px;')
-                  |     &#x9;&#x9;  
-                  input#product_name.form-control(type='product_name', placeholder='Information Point 8', style='margin-bottom: 10px;')
-                  |     &#x9;&#x9;  
-                  input#product_name.form-control(type='product_name', placeholder='Information Point 9', style='margin-bottom: 10px;')
-                  |     &#x9;&#x9;  
-                  input#product_name.form-control(type='product_name', placeholder='Information Point 10')
-                |   
-                |   &#x9;&#x9;&#x9;
-                button.btn.btn-aqua.btn-block(type='submit') Submit
-
+  .container
+    .jumbotron(style='margin-top: 100px; background-color: #fff; border: 1px solid #2C7873;')
+      .container
+        .row
+          .col-md-12
+            form#add-product-form(method="POST",action="/product/add")
+              h1.text-center Add A Product
+              .form-group
+                label(for='product_name') Product Name  
+                input#product_name.form-control(type='text',name="product_name",placeholder='Enter the Product Name as You Want Displayed')
+              .form-group
+                label(for='product_description') Product Details  
+                textarea#product_description.form-control(name="product_description",rows='3')
+              .form-group
+                label(for='image_URL') Photo URL   
+                input#image_URL.form-control(type='URL',name="image",placeholder='http://image.png')
+              .form-group
+                label(for='price') Price  
+                input#product_price.form-control(type='price',name="product_price",placeholder='$00.00')
+              .form-group
+                label(for='qty_on_hand') Quantity On Hand
+                input#qty_on_hand.form-control(type='text',name="qty_on_hand",placeholder='Quantity')
+              button.btn.btn-aqua.btn-block(type='submit') Submit
