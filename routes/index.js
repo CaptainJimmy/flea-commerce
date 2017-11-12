@@ -4,6 +4,7 @@ var Sequelize = require("sequelize");
 var db = require("../models");
 
 
+
 /* GET home page. */
 router.get('/', function(req, res) {
     db.Product.findAll({
@@ -18,10 +19,10 @@ router.get('/', function(req, res) {
     //res.render('index', { title: 'Express' });
 });
 
-router.get('/login', function(req, res) {
-    // Render __dirname/views/login.pug
-    res.render('login', { title: 'login' });
-});
+//router.get('/login', function(req, res) {
+// Render __dirname/views/login.pug
+//  res.render('login', { title: 'login' });
+//});
 
 
 module.exports = router;
