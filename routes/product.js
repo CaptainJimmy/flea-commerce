@@ -11,20 +11,21 @@ var session = require("express-session");
 router.get('/', function(req, res, next) {
     db.Product.findAll({})
         .then(function(dbProducts) {
-            res.render('products', dbProducts);
+            //res.json(dbProducts);
+            res.render('products', { product: dbProducts });
         });
 });
 
 
 // Get route for retrieving a single Product
-router.get("/detail/:id", function(req, res) {
+router.get("/:id", function(req, res) {
     db.Product.findOne({
             where: {
                 id: req.params.id
             }
         })
         .then(function(dbProduct) {
-            res.json(dbProduct);
+            res.render('detail', { product: dbProduct });
         });
 });
 
