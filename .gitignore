@@ -34,3 +34,4 @@ npm-debug.log
 
 # API keys and secrets
 .env.example
+.env
