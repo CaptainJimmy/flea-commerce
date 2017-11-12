@@ -1,25 +1,25 @@
 {
   "development": {
     "username": "root",
-    "password": null,
+    "password": "C0tto<3!",
     "database": "flea_commerce",
-    "host": "127.0.0.1",
+    "host": "localhost",
     "dialect": "mysql",
     "port": 3306
   },
   "test": {
     "username": "root",
-    "password": "root",
+    "password": "C0tto<3!",
     "database": "fleacommerce",
-    "host": "127.0.0.1",
+    "host": "localhost",
     "dialect": "mysql",
     "port": 8889
   },
   "production": {
     "username": "root",
-    "password": "root",
+    "password": "C0tto<3!",
     "database": "fleacommerce",
-    "host": "127.0.0.1",
+    "host": "localhost",
     "dialect": "mysql",
     "port": 8889
   }
