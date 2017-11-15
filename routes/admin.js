@@ -57,16 +57,18 @@ router.get('/customers', (req, res, next) => {
 });
 
 router.get('/customers/:id', function(req, res, next) {
-    var cust = req.params.id;
 
     db.Customer.findOne({
         where: {
-            id: cust
+            id: req.params.id
         }
     }).then((data) => {
         res.render('admin', { consoleChoice: "false", adminType: "customers", adminCommand: "edit", customer: data });
-
-    });
+    }).error((error) => {
+        var err = new Error("Not Found");
+        err.status = 404;
+        next(err);
+    })
 });
 router.put('/customers/:id', (req, res, next) => {
     if (!req.params.id) {

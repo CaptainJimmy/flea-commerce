@@ -72,7 +72,7 @@ block content
                                         li.list-group-item= cust.city
                                         li.list-group-item= cust.state
                                         li.list-group-item= cust.zip
-                                a.btn.btn-default(href=`/admin/customer/${item.id}/`) Edit This Product
+                                a.btn.btn-default(href=`/admin/customer/${cust.id}/`) Edit This Customer
 
                 else if (adminCommand === "edit")
                     .jumbotron
