@@ -29,7 +29,7 @@ block content
                                     a.btn.btn-default(href=`/admin/products/${item.id}/`) Edit This Product
                 
                 else if (adminCommand === "edit")
-                    .jumbotron
+                    .jumbotron#div1
                         h1 Edit Product
                     .container
                         form#edit-product
@@ -122,18 +122,16 @@ block content
             var pathURL="/admin/products/"+id
             $.ajax({
                 url: pathURL,
-                method: "DELETE",
+                type: "DELETE",
             }).done(function() {
             window.location.href = "/admin/products"
             });
         });
         $("#update-product").on("click", function(event){
             event.preventDefault();
-            id=$(this).attr("data-value");
-            var pathURL="/admin/products/"+id
-            var formData = new FormData();
-            var dataObj = $('#edit-product');
-            var newForm = new FormData(dataObj);
+            ID=$(this).attr("data-value");
+            var pathURL="/admin/products/"+ID
+            var formData = {};
             formData.product_name=$('#product_name').val().trim();
             formData.product_description=$('#product_description').val().trim();
             formData.image=$('#image_URL').val().trim();
@@ -141,17 +139,22 @@ block content
             formData.qty_on_hand=$('#qty_on_hand').val().trim();
 
             console.log(formData);
-            console.log(newForm);
 
             $.ajax({
-                method: "PUT",
+                type: "PUT",
                 url: pathURL,
-                data: formData
+                data: JSON.stringify({
+                    product_name: $('#product_name').val().trim(),
+                    product_description: $('#product_description').val().trim(),
+                    image: $('#image_URL').val().trim(),
+                    product_price: $('#product_price').val().trim(),
+                    qty_on_hand: $('#qty_on_hand').val().trim()
+                }),
+                contentType: "application/json"
             }).done(function() {
-            window.location.href = pathURL;
+                window.location.href = "/admin";
             });
-
-        })
+        });
             $("#update-customer").on("click", function(event){
             event.preventDefault();
             id=$(this).attr("data-value");
@@ -165,7 +168,7 @@ block content
 
             console.log(formData);
             $.ajax({
-                method: "PUT",
+                type: "PUT",
                 url: pathURL,
                 data: formData
             }).done(function() {
@@ -178,7 +181,7 @@ block content
             var pathURL="/admin/customers/"+id
             $.ajax({
                 url: pathURL,
-                type: DELETE,
+                type: "DELETE",
                 success: callback || $.noop,
                 error: errorCallback || $.noop
             }).done(function() {

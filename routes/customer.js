@@ -3,8 +3,6 @@ var router = express.Router();
 var db = require("../models");
 var passport = require("passport");
 var session = require("express-session");
-//var authController = require("../controllers/authcontroller.js");
-
 
 
 /* GET users listing. */
@@ -16,17 +14,20 @@ router.get('/login', (req, res, next) => {
     res.render('login');
 });
 
-router.post('/authenticate', passport.authenticate('local-signin', {
-    successRedirect: '/dashboard',
-    failureRedirect: '/login'
-}));
+//router.post('/authenticate', (req, res, next) => {
+//  successRedirect: '/dashboard',
+//failureRedirect: '/login'
+//});
 
-//router.get("/signup", authController.signup);
+router.get("/signup", (req, res, next) => {
+    res.render('signup');
+});
 
-//router.post("/create", passport.authenticate('local-signup', {
-//    successRedirect: '/dashboard',
-//    failureRedirect: '/signup'
-//}));
+router.post('/signup', (req, res, next) => {
+    db.Customer.create(req.body, {}).done((data) => {
+        res.redirect('/');
+    })
+});
 
 router.get("/logout", (req, res) => {
     req.session.destroy(function(err) {
