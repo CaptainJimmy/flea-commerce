@@ -5,7 +5,7 @@ db.Product.create({
     product_description: "Echo Dot (2nd Generation) - Black",
     product_price: 36.29,
     qty_on_hand: 10,
-    image: "https://www.bhphotovideo.com/images/images2000x2000/amazon_b01dfkc2so_echo_dot_black_1282300.jpgmax;"
+    image: "https://www.bhphotovideo.com/images/images2000x2000/amazon_b01dfkc2so_echo_dot_black_1282300.jpg"
 });
 db.Product.create({
     product_name: "Xbox 360",
