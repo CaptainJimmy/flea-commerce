@@ -82,10 +82,28 @@ router.put('/customers/:id', (req, res, next) => {
             }
         })
         .then((productsPost) => {
-            res.redirect('/admin/products/' + req.params.id);
+            res.json(productsPost);
         })
 });
 
+router.delete("/customers/:id", (req, res, next) => {
+    if (!req.params.id) {
+        var err = new Error("Not Found, No ID");
+        err.status = 404;
+        next(err);
+    }
+    db.Customer
+        .destroy({
+            where: {
+                id: req.params.id
+            }
+        })
+        .then((productsPost) => {
+            res.json(productsPost);
+        }).catch((err) => {
+            res.json(err)
+        });
+});
 router.get("/addproduct", function(req, res, next) {
     res.render("addproduct");
 });
