@@ -7,9 +7,9 @@ block content
         .card
           img.card-img-top.img-responsive( src= item.image)        
           .card-block.p-3
-            h4.card-title= item.product_name       
-              p.card-text= item.product_description  
-              a.btn.btn-aqua.mb-2(href=`/product/${item.id}/`)
-                i.fa.fa-bars(aria-hidden='true')
-              p.card-text Quantity Available:
-                span.card-text= item.qty_on_hand
+          h4.card-title= item.product_name       
+          p.card-text= item.product_description  
+          a.btn.btn-aqua.mb-2(href=`/product/${item.id}/`)
+            i.fa.fa-bars(aria-hidden='true')
+          p.card-text Quantity Available:
+            span.card-text= item.qty_on_hand
