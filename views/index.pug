@@ -20,49 +20,18 @@ block content
     // my insertion of featured products
     .container.container.mt-4.mb-5
       h3.display-4.text-center  Featured Products 
-      |     
       .row
-        .col-md-4
-          .card
-            img.card-img-top(src='https://dummyimage.com/350x250/c7c7c7/000.png', alt='Card image cap')
-            |           
-            .card-block.p-3
-              h4.card-title Product 1
-              |             
-              p.card-text
-                | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas quos aliquam sit molestias, eligendi, numquam officia aspernatur iure magni excepturi. Tempore, impedit error, eius delectus quae qui ullam aut quam.
-              |             
-              a.btn.btn-aqua.mb-2(href='#')
-                i.fa.fa-bars(aria-hidden='true')
-                |  Product Details
-        |       
-        .col-md-4
-          .card
-            img.card-img-top(src='https://dummyimage.com/350x250/c7c7c7/000.png', alt='Card image cap')
-            |           
-            .card-block.p-3
-              h4.card-title Product 2
-              |             
-              p.card-text
-                | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam itaque suscipit voluptates impedit consequuntur minus cupiditate voluptatibus qui amet excepturi, iure nihil neque sit rem perferendis, incidunt accusantium facere!
-              |             
-              a.btn.btn-aqua.mb-2(href='#')
-                i.fa.fa-bars(aria-hidden='true')
-                |  Product Details
-        |       
-        .col-md-4
-          .card
-            img.card-img-top(src='https://dummyimage.com/350x250/c7c7c7/000.png', alt='Card image cap')
-            |           
-            .card-block.p-3
-              h4.card-title Product 3
-              |             
-              p.card-text
-                | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Temporibus nihil corporis sint quisquam, sit nesciunt unde ab nemo ullam, rem vitae eius minima voluptatem voluptatum nulla similique atque facilis fugit! Ipsum oof.
-              |             
-              a.btn.btn-aqua.mb-2(href='#')
-                i.fa.fa-bars(aria-hidden='true')
-                |  Product Details
+        each item in product
+          .col-md-4
+            .card
+              img.card-img-top.cardsTop.mx-auto(src= item.image, alt='product image')       
+              .card-block.p-3
+                h4.card-title= item.product_name  
+                p.card-text= item.product_description        
+                a.btn.btn-aqua.mb-2(href=`/product/${item.id}/`)
+                  i.fa.fa-bars(aria-hidden='true')
+                  |  Product Details
+
     section#benefits.service-sec
       .container
         .row
@@ -70,9 +39,9 @@ block content
             .heading
               h2
                 small
-                  img(src='flea-logo.png', style='max-width: 40px', ;='')
-                  | flea-Commerce
-                | Enjoy the Benefits of flea-Commerce Shopping
+                  img(src='/images/flea-logo.png', style='max-width: 40px', ;='')
+                  | Flea-Commerce
+                | Enjoy the Benefits of Flea-Commerce Shopping
           |       
           .col-md-8
             .row
@@ -82,16 +51,15 @@ block content
                 h3 Any Time
                 |             
                 p
-                  | You don&apos;t even have to change out of your pajamas and you can catch great deals on flea-Commerce.
-              |           
+                  | Whether you wake up before the sun or never wake up before noon, Flea-Commerce is there for your one stop shopping convenience. No matter the time, we gotcha covered!    
               |           
               .col-md-6.text-sm-center.service-block
-                i.fa.fa-bath(aria-hidden='true')
+                i.fa.fa-snowflake-o(aria-hidden='true')
                 |             
-                h3 Any Place
+                h3 Winter is Coming
                 |             
                 p
-                  | The kitchen. The bathroom. The hotel lobby.  Anywhere that you have access to the internet, flea-Commerce is there.
+                  | Plus holidays are just around the corner. Who wants to spend their days out in the cold, fighting for parking spots, wrestling for the last present on your list?  Skip it all with Flea-Commerce!
           |         
           .col-md-4
             img.img-fluid(src='http://cdn.skim.gs/image/upload/v1456338125/msi/woman-online-sample-sale-horiz_ednked.jpg')
@@ -109,17 +77,19 @@ block content
           |         
           .col-md-4
             p
-              | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur odit quisquam, illum est vitae qui fuga debitis laudantium expedita, quam omnis ipsa libero laborum officia necessitatibus quibusdam. Modi, rerum, dolorem.
+              | Flea-Commerce offers competitive prices and a varitey of products.
             |           
             p
-              | Lorem ipsum dolor sit amet, consectetur adipisicing elit. At dignissimos ut fuga vitae magnam assumenda aperiam nostrum eum labore, deserunt provident dolorem, quis. Porro, commodi excepturi odio incidunt est neque.
+              | Flea-Commerce has easy returns! No problems, no hassles. We keep records of your transactions which makes it easier for you when dealing with the hussle and bussle of life.
           |         
           .col-md-4
             p
-              | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem consectetur ex id quasi rerum suscipit deleniti, unde adipisci dicta ducimus vel a quisquam eveniet fugit, velit ipsa saepe sunt ipsum?
+              | Flea-Commerce offers low shipping rates. As a matter of fact, orders over $50 ship for free!
             |           
             p
-              | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam magnam ipsam quidem unde cumque aut, porro numquam enim dolores consequatur tempore impedit. Veritatis distinctio, consectetur similique expedita veniam, rerum. Asperiores.
+              | And did we mentiont that Flea-Commerce is accessible at any time? But if you're reading this now, that means you're already here! So what are you waiting for?  Click that button! 
             |           
             p
-              a.btn.btn-transparent-white(href='#') Shop Now
+              a.btn.btn-transparent-white(href='#') 
+                i.fa.fa-usd(aria-hidden='true')
+                |  Shop Now

@@ -5,14 +5,14 @@ db.Product.create({
     product_description: "Echo Dot (2nd Generation) - Black",
     product_price: 36.29,
     qty_on_hand: 10,
-    image: "https://www.bhphotovideo.com/images/images2000x2000/amazon_b01dfkc2so_echo_dot_black_1282300.jpg"
+    image: "https://www.bhphotovideo.com/images/images2000x2000/amazon_b01dfkc2so_echo_dot_black_1282300.jpgmax;"
 });
 db.Product.create({
     product_name: "Xbox 360",
     product_description: "Xbox 360 4GB System Console with Peggle 2 Bundle",
     product_price: 114.14,
     qty_on_hand: 3,
-    image: "https//i5.walmartimages.com/asr/e65e9eec-08ec-4f43-81b4-4b28c3574773_1.998493048c6c9acec123050cc3be90ad.jpeg?odnHeight=450&odnWidth=450&odnBg=FFFFFF"
+    image: "https://upload.wikimedia.org/wikipedia/commons/a/a6/Xbox_360_System.png"
 });
 db.Product.create({
     product_name: "Samsung Chromebook",
@@ -57,7 +57,7 @@ db.Product.create({
     image: "https://images-na.ssl-images-amazon.com/images/I/41nWqrcI8bL._SY300_.jpg"
 });
 db.Product.create({
-    product_name: "Nest Cam Indoor security camera",
+    product_name: "Nest Cam Indoor Security Camera",
     product_description: "Nest Cam Indoor security camera",
     product_price: 183.00,
     qty_on_hand: 11,

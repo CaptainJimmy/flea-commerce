@@ -1,8 +1,10 @@
 var bCrypt = require("bcrypt-nodejs");
+console.log("testing1234");
 //testing1234
 //test
-module.exports = function(passport, user) {
-    var User = user;
+module.exports = function(passport, customer) {
+    var Customer = customer;
+    console.log("got here");
 
     var LocalStrategy = require("passport-local").Strategy;
 
@@ -30,11 +32,17 @@ module.exports = function(passport, user) {
                     var userPassword = generateHash(password);
 
                     var data = {
+                        username: req.body.username,
+                        customer_name: req.body.customer_name,
+                        address1: req.body.address1,
+                        address2: req.body.address2,
+                        city: req.body.city,
+                        state: req.body.state,
+                        zip: req.body.zip,
                         email: email,
-                        password: userPassword,
-                        firstname: req.body.firstname,
-                        lastname: req.body.lastname
+                        password: userPassword
                     };
+                    console.log(data);
                     Customer.create(
                         data
                     ).then(function(newUser, created) {
@@ -44,22 +52,22 @@ module.exports = function(passport, user) {
                         if (newUser) {
                             return done(null, newUser);
                         }
-                    });
+                    }).error(function(error) { console.log(error) });
                 }
             });
         }
     ));
     //serialize
-    passport.serializeUser(function(user, done) {
+    passport.serializeUser(function(customer, done) {
         done(null, user.id);
     });
     // deserialize user
     passport.deserializeUser(function(id, done) {
-        User.findById(id).then(function(user) {
+        Customer.findById(id).then(function(customer) {
             if (user) {
-                done(null, user.get());
+                done(null, customer.get());
             } else {
-                done(user.errors, null);
+                done(customer.errors, null);
             }
         });
     });

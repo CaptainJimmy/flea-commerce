@@ -14,31 +14,29 @@ html
     script(src='https://use.fontawesome.com/2c451e67ab.js')
   body
     .container-fluid
-      .navbar.navbar-expand-lg.mb-4.top-bar.navbar-top.sps.sps--abv
+      .navbar.navbar-expand-lg.mb-4.top-bar.navbar-top.sps.sps--blw
         .container
           button.navbar-toggler.navbar-toggler-right(type='button', data-toggle='collapse', data-target='#navbarCollapse1', aria-controls='navbarCollapse', aria-expanded='false', aria-label='Toggle navigation')
             span.navbar-toggler-icon    
           a.navbar-brand.mx-auto(href='#')
             img(src='/images/flea-logo.png', style='max-width: 40px', ;='')
-            span flea-Commerce
+            span Flea-Commerce
           #navbarCollapse1.collapse.navbar-collapse
             ul.navbar-nav.ml-auto
-              li.nav-item
-                a.nav-link(href='#myCarousel') Home  
               li.nav-item.active
-                a.nav-link(href='#')
-                  span.sr-only (current)       
+                a.nav-link(href='#') Home      
               li.nav-item
-                a.nav-link(href='#') Shopping Cart      
+                a.nav-link(href='#') Shop Now      
               li.nav-item
-                a.nav-link(href='#') Contact Us
+                a.nav-link(href='#') Shopping Cart
     block content
 
-    section.action-sec
+    section.action-sec.footer
       .container
         .action-box.text-center
-          h2 flea-Commerce
+          h2 
             img(src='/images/flea-logo.png', style='max-width: 30px', ;='')
+            span Flea-Commerce
     script(src='https://code.jquery.com/jquery-3.2.1.slim.min.js')
     script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js')
     script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js')
