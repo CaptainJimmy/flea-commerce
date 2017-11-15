@@ -1,0 +1,188 @@
+extends layout
+
+block content
+  .container.mt-4.mb-5(style='margin-top: 80px;')
+    h3.display-4.text-center  Admin Console
+    .container            
+        if (consoleChoice === "true")
+            .jumbotron
+                h1 Choose A Role:
+                br
+                a(href="/admin/products")
+                    button.btn.btn-default.btn-lg Edit Products
+                a(href="/admin/customers")
+                    button.btn.btn-default.btn-lg Edit Customers
+            
+        else if (consoleChoice === "false")
+            if (adminType === "products")
+                if ( adminCommand === "showAll" )
+                    .jumbotron
+                        h1 Show All Products
+                    .container
+                        each item in product
+                            .card
+                                .card-block.p-3
+                                    h4.card-title= item.product_name
+                                    p.card-text= item.product_description
+                                    p.card-text Quantity:
+                                        span.card-text= item.qty_on_hand
+                                    a.btn.btn-default(href=`/admin/products/${item.id}/`) Edit This Product
+                
+                else if (adminCommand === "edit")
+                    .jumbotron
+                        h1 Edit Product
+                    .container
+                        form#edit-product
+                            .form-group
+                                label(for="product_name")
+                                input.form-control#product_name(name="product_name", type="text",value= product.product_name)
+                            .form-group
+                                label(for='product_description') Product Description  
+                                input#product_description.form-control(name="product_description",type="text",value= product.product_description)
+                            .form-group
+                                label(for='image_URL') Photo URL   
+                                input#image_URL.form-control(type='text',name="image",value= product.image)
+                            .form-group
+                                label(for='product_price') Product Price  
+                                input#product_price.form-control(type='price',name="product_price",value= product.product_price)
+                            .form-group
+                                label(for='qty_on_hand') Quantity On Hand
+                                input#qty_on_hand.form-control(type='text',name="qty_on_hand",value= product.qty_on_hand)
+                            button.btn.btn-default.btn-lg#update-product(type='submit',data-value= product.id ) Submit
+                            h2 Product id:
+                            span= product.id
+                        button.btn.btn-danger.btn-lg#delete-product(data-value= product.id ) Delete Product (DANGER!)
+                else 
+                    .jumbotron
+                        h1 Error
+            else if (adminType === "customers")
+                if ( adminCommand === "showAll" )
+                    .jumbotron
+                        h1 Show All Customers
+                    .container
+                        each cust in customer
+                            .card
+                                .card-block.p-3
+                                    h4.card-title= cust.email
+                                    ul.list-group
+                                        li.list-group-item= cust.username
+                                        li.list-group-item= cust.customer_name
+                                        li.list-group-item= cust.address1
+                                        li.list-group-item= cust.address2
+                                        li.list-group-item= cust.city
+                                        li.list-group-item= cust.state
+                                        li.list-group-item= cust.zip
+                                a.btn.btn-default(href=`/admin/customer/${item.id}/`) Edit This Product
+
+                else if (adminCommand === "edit")
+                    .jumbotron
+                        h1 Edit Customer
+                        form#edit-customer
+                            .form-group
+                                label.form-control(for="customer_name") Customer Name
+                                input.form-control#customer_name(name="customer_name", type="text",value= customer.customer_name) 
+                            .form-group
+                                label(for='username') Username  
+                                textarea#username.form-control(name="username",type="text",value= customer.username)
+                            .form-group
+                                label(for='email') Email   
+                                input#email.form-control(type='email',name="email",value= customer.email)
+                            .form-group
+                                label(for='address1') Address 1  
+                                input#address1.form-control(type='text',name="address1",value= customer.address1)
+                            .form-group
+                                label(for='address2') Address 2  
+                                input#address2.form-control(type='text',name="address2",value= customer.address2) 
+                            .form-group
+                                label(for='city') City  
+                                input#city.form-control(type='text',name="city",value= customer.city)
+                            .form-group
+                                label(for='state') State  
+                                input#state.form-control(type='text',name="state",value= customer.state)                
+                            .form-group
+                                label(for='zip') Zip 
+                                input#zip.form-control(type='text',name="zip",value= customer.zip)
+                            button.btn.btn-default.btn-lg#update-customer(type='submit', data-value= customer.id) Submit 
+                        button.btn.btn-danger.btn-lg#delete-customer(data-value= customer.id) Delete Customer (DANGER!!)
+                else
+                    .jumbotron
+                        h1 Error No adminCommand
+            else
+                .jumbotron
+                    h1 Error No adminType
+        else
+            .jumbotron
+                h1 Error no choice
+    script.
+        $(document).ready(function(){
+        
+        $("#delete-product").on("click", function(event){
+            event.preventDefault();
+            id=$(this).attr("data-value");
+            var pathURL="/admin/products/"+id
+            $.ajax({
+                url: pathURL,
+                method: "DELETE",
+            }).done(function() {
+            window.location.href = "/admin/products"
+            });
+        });
+        $("#update-product").on("click", function(event){
+            event.preventDefault();
+            id=$(this).attr("data-value");
+            var pathURL="/admin/products/"+id
+            var formData = new FormData();
+            var dataObj = $('#edit-product');
+            var newForm = new FormData(dataObj);
+            formData.product_name=$('#product_name').val().trim();
+            formData.product_description=$('#product_description').val().trim();
+            formData.image=$('#image_URL').val().trim();
+            formData.product_price=$('#product_price').val().trim();
+            formData.qty_on_hand=$('#qty_on_hand').val().trim();
+
+            console.log(formData);
+            console.log(newForm);
+
+            $.ajax({
+                method: "PUT",
+                url: pathURL,
+                data: formData
+            }).done(function() {
+            window.location.href = pathURL;
+            });
+
+        })
+            $("#update-customer").on("click", function(event){
+            event.preventDefault();
+            id=$(this).attr("data-value");
+            var pathURL="/admin/customer/"+id
+            var formData = new FormData();
+            formData.product_name=$('#product_name').val().trim();
+            formData.product_description=$('#product_description').val().trim();
+            formData.image=$('#image_URL').val().trim();
+            formData.product_price=$('#product_price').val().trim();
+            formData.qty_on_hand=$('#qty_on_hand').val().trim();
+
+            console.log(formData);
+            $.ajax({
+                method: "PUT",
+                url: pathURL,
+                data: formData
+            }).done(function() {
+            window.location.href = pathURL;
+            });
+        })
+        $("#delete-customer").on("click", function(event){
+            event.preventDefault();
+            id=$(this).attr("data-value");
+            var pathURL="/admin/customers/"+id
+            $.ajax({
+                url: pathURL,
+                type: DELETE,
+                success: callback || $.noop,
+                error: errorCallback || $.noop
+            }).done(function() {
+                window.location.href = "/admin/customers"
+            })
+        })
+        });

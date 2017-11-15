@@ -56,13 +56,6 @@ module.exports = function(sequelize, DataTypes) {
         password: {
             type: DataTypes.STRING,
             allowNull: false,
-            validate: {
-                len: [5, 20]
-            }
-        },
-        status: {
-            type: DataTypes.ENUM('active', 'inactive'),
-            defaultValue: 'active'
         },
         past_orders: {
             type: DataTypes.STRING,
