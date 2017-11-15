@@ -26,11 +26,10 @@ build/Release
 # https://docs.npmjs.com/cli/shrinkwrap#caveats
 node_modules
 config/config.json
-config/*
-./config/*
 
 # Debug log from npm
 npm-debug.log
 
 # API keys and secrets
+.env.example
 .env

@@ -60,6 +60,10 @@ module.exports = function(sequelize, DataTypes) {
                 len: [5, 20]
             }
         },
+        status: {
+            type: DataTypes.ENUM('active', 'inactive'),
+            defaultValue: 'active'
+        },
         past_orders: {
             type: DataTypes.STRING,
             allowNull: true,

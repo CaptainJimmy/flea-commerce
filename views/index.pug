@@ -1,5 +1,95 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+    // Slider main container
+    #myCarousel.swiper-container.main-slider
+      .swiper-wrapper
+        .swiper-slide.slider-bg-position(style="background:url('https://images.agoramedia.com/EHBlogImages/lynda-shrager/2015/12/get-Organized-for-Holiday-Shopping-ALT-722x406.jpg')", data-hash='slide1')
+          h2 One Stop Shopping Spot for Everybody on your Shopping List
+        |     
+        .swiper-slide.slider-bg-position(style="background:url('http://www.analystconsult.com/wp-content/uploads/2015/12/eCommerce-is-retail-future.jpg')", data-hash='slide2')
+          h2 Avoid the Crowd and Shop From the Comfort of Your Couch
+      // Add Pagination
+      .swiper-pagination
+      // Add Navigation
+      .swiper-button-prev
+        i.fa.fa-chevron-left
+      |   
+      .swiper-button-next
+        i.fa.fa-chevron-right
+    // my insertion of featured products
+    .container.container.mt-4.mb-5
+      h3.display-4.text-center  Featured Products 
+      .row
+        each item in product
+          .col-md-4
+            .card
+              img.card-img-top.cardsTop.mx-auto(src= item.image, alt='product image')       
+              .card-block.p-3
+                h4.card-title= item.product_name  
+                p.card-text= item.product_description        
+                a.btn.btn-aqua.mb-2(href=`/product/${item.id}/`)
+                  i.fa.fa-bars(aria-hidden='true')
+                  |  Product Details
+
+    section#benefits.service-sec
+      .container
+        .row
+          .col-md-12
+            .heading
+              h2
+                small
+                  img(src='/images/flea-logo.png', style='max-width: 40px', ;='')
+                  | Flea-Commerce
+                | Enjoy the Benefits of Flea-Commerce Shopping
+          |       
+          .col-md-8
+            .row
+              .col-md-6.text-sm-center.service-block
+                i.fa.fa-clock-o(aria-hidden='true')
+                |             
+                h3 Any Time
+                |             
+                p
+                  | Whether you wake up before the sun or never wake up before noon, Flea-Commerce is there for your one stop shopping convenience. No matter the time, we gotcha covered!    
+              |           
+              .col-md-6.text-sm-center.service-block
+                i.fa.fa-snowflake-o(aria-hidden='true')
+                |             
+                h3 Winter is Coming
+                |             
+                p
+                  | Plus holidays are just around the corner. Who wants to spend their days out in the cold, fighting for parking spots, wrestling for the last present on your list?  Skip it all with Flea-Commerce!
+          |         
+          .col-md-4
+            img.img-fluid(src='http://cdn.skim.gs/image/upload/v1456338125/msi/woman-online-sample-sale-horiz_ednked.jpg')
+        // row
+    |   
+    section#about.about-sec.parallax-section
+      .container
+        .row
+          .col-md-3
+            h2
+              small Who We Are
+              | About
+              br
+              | Us
+          |         
+          .col-md-4
+            p
+              | Flea-Commerce offers competitive prices and a varitey of products.
+            |           
+            p
+              | Flea-Commerce has easy returns! No problems, no hassles. We keep records of your transactions which makes it easier for you when dealing with the hussle and bussle of life.
+          |         
+          .col-md-4
+            p
+              | Flea-Commerce offers low shipping rates. As a matter of fact, orders over $50 ship for free!
+            |           
+            p
+              | And did we mentiont that Flea-Commerce is accessible at any time? But if you're reading this now, that means you're already here! So what are you waiting for?  Click that button! 
+            |           
+            p
+              a.btn.btn-transparent-white(href='#') 
+                i.fa.fa-usd(aria-hidden='true')
+                |  Shop Now

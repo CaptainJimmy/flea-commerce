@@ -1,6 +1,6 @@
-const nodemailer = require('nodemailer');
+var nodemailer = require('nodemailer');
 
-const transporter = nodemailer.createTransport({
+var transporter = nodemailer.createTransport({
   service: 'SendGrid',
   auth: {
     user: process.env.SENDGRID_USER,
@@ -27,14 +27,14 @@ exports.postContact = (req, res) => {
   req.assert('email', 'Email is not valid').isEmail();
   req.assert('message', 'Message cannot be blank').notEmpty();
 
-  const errors = req.validationErrors();
+  var errors = req.validationErrors();
 
   if (errors) {
     req.flash('errors', errors);
     return res.redirect('/contact');
   }
 
-  const mailOptions = {
+  var mailOptions = {
     to: 'your@email.com',
     from: `${req.body.name} <${req.body.email}>`,
     subject: 'Contact Form | Hackathon Starter',

@@ -1,0 +1,17 @@
+extends layout
+
+block content
+  .container.mt-4.mb-5(style='margin-top: 80px;')
+    h3.display-4.text-center  Products 
+      .row   
+        each item in product
+          .card.col-lg-4.sp
+            img.card-img-top.item-photos( src= item.image)(style='max-width:280px; text-align:center;')       
+            .card-block.p-3
+              h4.card-title= item.product_name       
+                p.card-text= item.product_description  
+                a.btn.btn-aqua.mb-2(href=`/product/${item.id}/`)
+                  i.fa.fa-bars(aria-hidden='true')
+                  span  Product Details 
+                p.small Quantity Available: 
+                  span= item.qty_on_hand

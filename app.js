@@ -7,9 +7,13 @@ var bodyParser = require('body-parser');
 var index = require('./routes/index');
 var user = require('./routes/user');
 var customer = require('./routes/customer');
+var product = require('./routes/product')
 var app = express();
 var passport = require('passport');
 var session = require('express-session');
+var env = require("dotenv").load();
+var models = require("./models");
+var authRoute = require("./routes/auth.js");
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -25,6 +29,14 @@ app.use(express.static(path.join(__dirname, '/public')));
 app.use('/', index);
 app.use('/user', user);
 app.use('/customer', customer);
+app.use('/product', product);
+app.use('/test', authRoute)
+
+// For Passport
+app.use(session({ secret: 'keyboard cat', resave: true, saveUninitialized: true })); // session secret
+app.use(passport.initialize());
+app.use(passport.session()); // persistent login sessions
+require("./config/passport/passport.js")(passport, models.customer);
 
 
 

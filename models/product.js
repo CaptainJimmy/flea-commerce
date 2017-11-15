@@ -12,6 +12,10 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.INTEGER,
             allowNull: false
         },
+        category: {
+            type: DataTypes.TEXT,
+            allowNull: true
+        },
         qty_on_hand: {
             type: DataTypes.INTEGER,
             allowNull: false
