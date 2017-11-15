@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var index = require('./routes/index');
 var user = require('./routes/user');
+var admin = require("./routes/admin");
 var customer = require('./routes/customer');
 var product = require('./routes/product')
 var app = express();
@@ -30,13 +31,14 @@ app.use('/', index);
 app.use('/user', user);
 app.use('/customer', customer);
 app.use('/product', product);
-app.use('/test', authRoute)
+app.use('/test', authRoute);
+app.use('/admin', admin);
 
 // For Passport
 app.use(session({ secret: 'keyboard cat', resave: true, saveUninitialized: true })); // session secret
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
-require("./config/passport/passport.js")(passport, models.customer);
+
 
 
 

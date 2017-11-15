@@ -1,33 +1,41 @@
-var authController = require("../controllers/authcontroller.js");
 var express = require("express");
 var router = express.Router();
-var db = require("../models");
+var models = require("../models");
 var passport = require("passport");
 var session = require("express-session");
+require("../config/passport/passport.js")(passport, models.Customer);
+router.get("/", (req, res, next) => {
+    res.render("signup");
+});
 
-router.get("/", authController.signin);
+router.get("/signup", (req, res, next) => {
+    res.render("signup");
+});
 
-router.get("/signup", authController.signup);
+router.get("/signin", (req, res, next) => {
+    res.render("signin");
+});
 
-router.get("/signin", authController.signin);
+router.post("/signup", passport.authenticate("local-signup", {
+    successRedirect: "/test/dashboard",
+    failureRedirect: "/test/signup"
+}));
 
-router.post(
-    "/signup",
-    passport.authenticate("local-signup", {
-        successRedirect: "/test/dashboard",
-        failureRedirect: "/test/signup"
-    })
-);
+router.get("/dashboard", isLoggedIn, (req, res) => {
+    res.render("dashboard");
+});
 
-router.get("/dashboard", isLoggedIn, authController.dashboard);
-
-router.get("/logout", authController.logout);
+router.get("/logout", (req, res) => {
+    req.session.destroy((err) => {
+        res.redirect("/");
+    });
+});
 
 router.post(
     "/signin",
     passport.authenticate("local-signin", {
-        successRedirect: "/dashboard",
-        failureRedirect: "/signin"
+        successRedirect: "/test/dashboard",
+        failureRedirect: "/test/signin"
     })
 );
 
