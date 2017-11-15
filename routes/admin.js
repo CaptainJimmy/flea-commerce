@@ -27,23 +27,25 @@ router.get('/products/:id', (req, res, next) => {
     }).then((data) => {
         //console.log(data)
         res.render('admin', { consoleChoice: "false", adminType: "products", adminCommand: "edit", product: data });
-        // res.json({ consoleChoice: "false", adminType: "products", adminCommand: "edit", product: data });
 
     });
 });
-router.put('/products?:id', (req, res, next) => {
+router.put('/products/:id', (req, res, next) => {
     if (!req.params.id) {
         var err = new Error('Not Found, No ID');
         err.status = 404;
         next(err);
     }
-    db.Products.update(req.body, {
+
+    db.Product.update(req.body, {
             where: {
                 id: req.params.id
             }
         })
-        .then((productsPost) => {
-            res.redirect('/admin/products?' + req.params.id);
+        .catch((error) => {
+            var err = new Error(error);
+            err.status = 404;
+            next(err);
         })
 });
 
