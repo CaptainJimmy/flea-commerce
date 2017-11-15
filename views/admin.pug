@@ -72,18 +72,18 @@ block content
                                         li.list-group-item= cust.city
                                         li.list-group-item= cust.state
                                         li.list-group-item= cust.zip
-                                a.btn.btn-default(href=`/admin/customer/${item.id}/`) Edit This Product
+                                a.btn.btn-default(href=`/admin/customers/${cust.id}/`) Edit This Customer
 
                 else if (adminCommand === "edit")
                     .jumbotron
                         h1 Edit Customer
                         form#edit-customer
                             .form-group
-                                label.form-control(for="customer_name") Customer Name
+                                label(for="customer_name") Customer Name
                                 input.form-control#customer_name(name="customer_name", type="text",value= customer.customer_name) 
                             .form-group
                                 label(for='username') Username  
-                                textarea#username.form-control(name="username",type="text",value= customer.username)
+                                input#username.form-control(name="username",type="text",value= customer.username)
                             .form-group
                                 label(for='email') Email   
                                 input#email.form-control(type='email',name="email",value= customer.email)
@@ -157,33 +157,36 @@ block content
         });
             $("#update-customer").on("click", function(event){
             event.preventDefault();
-            id=$(this).attr("data-value");
-            var pathURL="/admin/customer/"+id
-            var formData = new FormData();
-            formData.product_name=$('#product_name').val().trim();
-            formData.product_description=$('#product_description').val().trim();
-            formData.image=$('#image_URL').val().trim();
-            formData.product_price=$('#product_price').val().trim();
-            formData.qty_on_hand=$('#qty_on_hand').val().trim();
+            ID=$(this).attr("data-value");
+            var pathURL="/admin/customers/"+ID
+            var formData = {};
+            formData.customer_name= $('#customer_name').val().trim();
+            formData.username= $('#username').val().trim();
+            formData.email= $('#email').val().trim();
+            formData.address1=$('#address1').val().trim();
+            formData.address2= $('#address2').val().trim();
+            formData.city= $('#city').val().trim();
+            formData.state= $('#state').val().trim();
+            formData.zip= $('#zip').val().trim();
 
             console.log(formData);
             $.ajax({
                 type: "PUT",
                 url: pathURL,
-                data: formData
+                data: JSON.stringify(formData),
+                contentType: "application/json",
+                processData: false
             }).done(function() {
             window.location.href = pathURL;
-            });
-        })
+            })
+        });
         $("#delete-customer").on("click", function(event){
             event.preventDefault();
             id=$(this).attr("data-value");
             var pathURL="/admin/customers/"+id
             $.ajax({
                 url: pathURL,
-                type: "DELETE",
-                success: callback || $.noop,
-                error: errorCallback || $.noop
+                type: "DELETE"
             }).done(function() {
                 window.location.href = "/admin/customers"
             })
