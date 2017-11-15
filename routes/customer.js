@@ -14,10 +14,10 @@ router.get('/login', (req, res, next) => {
     res.render('login');
 });
 
-router.post('/authenticate', (req, res, next) => {
-    successRedirect: '/dashboard',
-    failureRedirect: '/login'
-});
+//router.post('/authenticate', (req, res, next) => {
+//  successRedirect: '/dashboard',
+//failureRedirect: '/login'
+//});
 
 router.get("/signup", (req, res, next) => {
     res.render('signup');
