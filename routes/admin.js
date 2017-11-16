@@ -48,7 +48,25 @@ router.put('/products/:id', (req, res, next) => {
             next(err);
         })
 });
-
+router.delete("/products/:id", (req, res, next) => {
+    if (!req.params.id) {
+        var err = new Error("Not Found, No ID");
+        err.status = 404;
+        next(err);
+    }
+    db.Product
+        .destroy({
+            where: {
+                id: req.params.id
+            }
+        })
+        .then(productsPost => {
+            res.json(productsPost);
+        })
+        .catch(err => {
+            res.json(err);
+        });
+});
 router.get('/customers', (req, res, next) => {
     db.Customer.findAll({}).then((data) => {
         res.render('admin', { consoleChoice: "false", adminType: "customers", adminCommand: "showAll", customer: data });
