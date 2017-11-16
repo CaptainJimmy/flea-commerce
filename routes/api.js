@@ -1,411 +1,18 @@
-const bluebird = require('bluebird');
-const request = bluebird.promisifyAll(require('request'), { multiArgs: true });
-const cheerio = require('cheerio');
-const graph = require('fbgraph');
-const LastFmNode = require('lastfm').LastFmNode;
-const tumblr = require('tumblr.js');
-const GitHub = require('github');
-const clockwork = require('clockwork')({ key: process.env.CLOCKWORK_KEY });
-const paypal = require('paypal-rest-sdk');
-const lob = require('lob')(process.env.LOB_KEY);
+var express = require("express");
+var router = express.Router();
+var models = require("../models");
+var passport = require("../config/passport");
+var paypal = require('paypal-rest-sdk');
 
-/**
- * GET /api
- * List of API examples.
- */
-exports.getApi = (req, res) => {
-  res.render('api/index', {
-    title: 'API Examples'
-  });
-};
+exports.getPayPal = function (req, res, next) {
 
-/**
- * GET /api/scraping
- * Web scraping example using Cheerio library.
- */
-exports.getScraping = (req, res, next) => {
-  request.get('https://news.ycombinator.com/', (err, request, body) => {
-    if (err) { return next(err); }
-    const $ = cheerio.load(body);
-    const links = [];
-    $('.title a[href^="http"], a[href^="https"]').each((index, element) => {
-      links.push($(element));
-    });
-    res.render('api/scraping', {
-      title: 'Web Scraping',
-      links
-    });
-  });
-};
-
-/**
- * GET /api/github
- * GitHub API Example.
- */
-exports.getGithub = (req, res, next) => {
-  const github = new GitHub();
-  github.repos.get({ owner: 'sahat', repo: 'hackathon-starter' }, (err, repo) => {
-    if (err) { return next(err); }
-    res.render('api/github', {
-      title: 'GitHub API',
-      repo
-    });
-  });
-};
-
-/**
- * GET /api/aviary
- * Aviary image processing example.
- */
-exports.getAviary = (req, res) => {
-  res.render('api/aviary', {
-    title: 'Aviary API'
-  });
-};
-
-/**
- * GET /api/nyt
- * New York Times API example.
- */
-exports.getNewYorkTimes = (req, res, next) => {
-  const query = {
-    'list-name': 'young-adult',
-    'api-key': process.env.NYT_KEY
-  };
-  request.get({ url: 'http://api.nytimes.com/svc/books/v2/lists', qs: query }, (err, request, body) => {
-    if (err) { return next(err); }
-    if (request.statusCode === 403) {
-      return next(new Error('Invalid New York Times API Key'));
-    }
-    const books = JSON.parse(body).results;
-    res.render('api/nyt', {
-      title: 'New York Times API',
-      books
-    });
-  });
-};
-
-/**
- * GET /api/lastfm
- * Last.fm API example.
- */
-exports.getLastfm = (req, res, next) => {
-  const lastfm = new LastFmNode({
-    api_key: process.env.LASTFM_KEY,
-    secret: process.env.LASTFM_SECRET
-  });
-  const artistInfo = () =>
-    new Promise((resolve, reject) => {
-      lastfm.request('artist.getInfo', {
-        artist: 'Roniit',
-        handlers: {
-          success: resolve,
-          error: reject
-        }
-      });
-    });
-  const artistTopTracks = () =>
-    new Promise((resolve, reject) => {
-      lastfm.request('artist.getTopTracks', {
-        artist: 'Roniit',
-        handlers: {
-          success: (data) => {
-            resolve(data.toptracks.track.slice(0, 10));
-          },
-          error: reject
-        }
-      });
-    });
-  const artistTopAlbums = () =>
-      new Promise((resolve, reject) => {
-        lastfm.request('artist.getTopAlbums', {
-          artist: 'Roniit',
-          handlers: {
-            success: (data) => {
-              resolve(data.topalbums.album.slice(0, 3));
-            },
-            error: reject
-          }
-        });
-      });
-  Promise.all([
-    artistInfo(),
-    artistTopTracks(),
-    artistTopAlbums()
-  ])
-  .then(([artistInfo, artistTopAlbums, artistTopTracks]) => {
-    const artist = {
-      name: artistInfo.artist.name,
-      image: artistInfo.artist.image.slice(-1)[0]['#text'],
-      tags: artistInfo.artist.tags.tag,
-      bio: artistInfo.artist.bio.summary,
-      stats: artistInfo.artist.stats,
-      similar: artistInfo.artist.similar.artist,
-      topAlbums: artistTopAlbums,
-      topTracks: artistTopTracks
-    };
-    res.render('api/lastfm', {
-      title: 'Last.fm API',
-      artist
-    });
-  })
-  .catch(next);
-};
-
-/**
- * GET /api/twitter
- * Twitter API example.
- */
-exports.getTwitter = (req, res, next) => {
-  const token = req.user.tokens.find(token => token.kind === 'twitter');
-  const T = new Twit({
-    consumer_key: process.env.TWITTER_KEY,
-    consumer_secret: process.env.TWITTER_SECRET,
-    access_token: token.accessToken,
-    access_token_secret: token.tokenSecret
-  });
-  T.get('search/tweets', { q: 'nodejs since:2013-01-01', geocode: '40.71448,-74.00598,5mi', count: 10 }, (err, reply) => {
-    if (err) { return next(err); }
-    res.render('api/twitter', {
-      title: 'Twitter API',
-      tweets: reply.statuses
-    });
-  });
-};
-
-/**
- * POST /api/twitter
- * Post a tweet.
- */
-exports.postTwitter = (req, res, next) => {
-  req.assert('tweet', 'Tweet cannot be empty').notEmpty();
-
-  const errors = req.validationErrors();
-
-  if (errors) {
-    req.flash('errors', errors);
-    return res.redirect('/api/twitter');
-  }
-
-  const token = req.user.tokens.find(token => token.kind === 'twitter');
-  const T = new Twit({
-    consumer_key: process.env.TWITTER_KEY,
-    consumer_secret: process.env.TWITTER_SECRET,
-    access_token: token.accessToken,
-    access_token_secret: token.tokenSecret
-  });
-  T.post('statuses/update', { status: req.body.tweet }, (err) => {
-    if (err) { return next(err); }
-    req.flash('success', { msg: 'Your tweet has been posted.' });
-    res.redirect('/api/twitter');
-  });
-};
-
-/**
- * GET /api/steam
- * Steam API example.
- */
-exports.getSteam = (req, res, next) => {
-  const steamId = '76561197982488301';
-  const params = { l: 'english', steamid: steamId, key: process.env.STEAM_KEY };
-  const playerAchievements = () => {
-    params.appid = '49520';
-    return request.getAsync({ url: 'http://api.steampowered.com/ISteamUserStats/GetPlayerAchievements/v0001/', qs: params, json: true })
-      .then(([request, body]) => {
-        if (request.statusCode === 401) {
-          throw new Error('Invalid Steam API Key');
-        }
-        return body;
-      });
-  };
-  const playerSummaries = () => {
-    params.steamids = steamId;
-    return request.getAsync({ url: 'http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/', qs: params, json: true })
-      .then(([request, body]) => {
-        if (request.statusCode === 401) {
-          throw Error('Missing or Invalid Steam API Key');
-        }
-        return body;
-      });
-  };
-  const ownedGames = () => {
-    params.include_appinfo = 1;
-    params.include_played_free_games = 1;
-    return request.getAsync({ url: 'http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/', qs: params, json: true })
-      .then(([request, body]) => {
-        if (request.statusCode === 401) {
-          throw new Error('Missing or Invalid Steam API Key');
-        }
-        return body;
-      });
-  };
-  Promise.all([
-    playerAchievements(),
-    playerSummaries(),
-    ownedGames()
-  ])
-  .then(([playerAchievements, playerSummaries, ownedGames]) => {
-    res.render('api/steam', {
-      title: 'Steam Web API',
-      ownedGames: ownedGames.response.games,
-      playerAchievemments: playerAchievements.playerstats,
-      playerSummary: playerSummaries.response.players[0]
-    });
-  })
-  .catch(next);
-};
-
-/**
- * GET /api/stripe
- * Stripe API example.
- */
-exports.getStripe = (req, res) => {
-  res.render('api/stripe', {
-    title: 'Stripe API',
-    publishableKey: process.env.STRIPE_PKEY
-  });
-};
-
-/**
- * POST /api/stripe
- * Make a payment.
- */
-exports.postStripe = (req, res) => {
-  const stripeToken = req.body.stripeToken;
-  const stripeEmail = req.body.stripeEmail;
-  stripe.charges.create({
-    amount: 395,
-    currency: 'usd',
-    source: stripeToken,
-    description: stripeEmail
-  }, (err) => {
-    if (err && err.type === 'StripeCardError') {
-      req.flash('errors', { msg: 'Your card has been declined.' });
-      return res.redirect('/api/stripe');
-    }
-    req.flash('success', { msg: 'Your card has been successfully charged.' });
-    res.redirect('/api/stripe');
-  });
-};
-
-/**
- * GET /api/twilio
- * Twilio API example.
- */
-exports.getTwilio = (req, res) => {
-  res.render('api/twilio', {
-    title: 'Twilio API'
-  });
-};
-
-/**
- * POST /api/twilio
- * Send a text message using Twilio.
- */
-exports.postTwilio = (req, res, next) => {
-  req.assert('number', 'Phone number is required.').notEmpty();
-  req.assert('message', 'Message cannot be blank.').notEmpty();
-
-  const errors = req.validationErrors();
-
-  if (errors) {
-    req.flash('errors', errors);
-    return res.redirect('/api/twilio');
-  }
-
-  const message = {
-    to: req.body.number,
-    from: '+13472235148',
-    body: req.body.message
-  };
-  twilio.sendMessage(message, (err, responseData) => {
-    if (err) { return next(err.message); }
-    req.flash('success', { msg: `Text sent to ${responseData.to}.` });
-    res.redirect('/api/twilio');
-  });
-};
-
-/**
- * GET /api/clockwork
- * Clockwork SMS API example.
- */
-exports.getClockwork = (req, res) => {
-  res.render('api/clockwork', {
-    title: 'Clockwork SMS API'
-  });
-};
-
-/**
- * POST /api/clockwork
- * Send a text message using Clockwork SMS
- */
-exports.postClockwork = (req, res, next) => {
-  const message = {
-    To: req.body.telephone,
-    From: 'Hackathon',
-    Content: 'Hello from the Hackathon Starter'
-  };
-  clockwork.sendSms(message, (err, responseData) => {
-    if (err) { return next(err.errDesc); }
-    req.flash('success', { msg: `Text sent to ${responseData.responses[0].to}` });
-    res.redirect('/api/clockwork');
-  });
-};
-
-/**
- * GET /api/linkedin
- * LinkedIn API example.
- */
-exports.getLinkedin = (req, res, next) => {
-  const token = req.user.tokens.find(token => token.kind === 'linkedin');
-  const linkedin = Linkedin.init(token.accessToken);
-  linkedin.people.me((err, $in) => {
-    if (err) { return next(err); }
-    res.render('api/linkedin', {
-      title: 'LinkedIn API',
-      profile: $in
-    });
-  });
-};
-
-/**
- * GET /api/instagram
- * Instagram API example.
- */
-exports.getInstagram = (req, res, next) => {
-  const token = req.user.tokens.find(token => token.kind === 'instagram');
-  ig.use({ client_id: process.env.INSTAGRAM_ID, client_secret: process.env.INSTAGRAM_SECRET });
-  ig.use({ access_token: token.accessToken });
-  Promise.all([
-    ig.user_searchAsync('richellemead'),
-    ig.userAsync('175948269'),
-    ig.media_popularAsync(),
-    ig.user_self_media_recentAsync()
-  ])
-  .then(([searchByUsername, searchByUserId, popularImages, myRecentMedia]) => {
-    res.render('api/instagram', {
-      title: 'Instagram API',
-      usernames: searchByUsername,
-      userById: searchByUserId,
-      popularImages,
-      myRecentMedia
-    });
-  })
-  .catch(next);
-};
-
-/**
- * GET /api/paypal
- * PayPal SDK example.
- */
-exports.getPayPal = (req, res, next) => {
   paypal.configure({
     mode: 'sandbox',
     client_id: process.env.PAYPAL_ID,
     client_secret: process.env.PAYPAL_SECRET
   });
 
-  const paymentDetails = {
+  var paymentDetails = {
     intent: 'sale',
     payer: {
       payment_method: 'paypal'
@@ -415,7 +22,7 @@ exports.getPayPal = (req, res, next) => {
       cancel_url: process.env.PAYPAL_CANCEL_URL
     },
     transactions: [{
-      description: 'Hackathon Starter',
+      description: 'FleaCommerce',
       amount: {
         currency: 'USD',
         total: '1.99'
@@ -423,13 +30,15 @@ exports.getPayPal = (req, res, next) => {
     }]
   };
 
-  paypal.payment.create(paymentDetails, (err, payment) => {
-    if (err) { return next(err); }
+  paypal.payment.create(paymentDetails, function (err, payment) {
+    if (err) {
+      return next(err);
+    }
     req.session.paymentId = payment.id;
-    const links = payment.links;
-    for (let i = 0; i < links.length; i++) {
+    var links = payment.links;
+    for (var i = 0; i < links.length; i++) {
       if (links[i].rel === 'approval_url') {
-        res.render('api/paypal', {
+        res.render('/', {
           approvalUrl: links[i].href
         });
       }
@@ -441,14 +50,21 @@ exports.getPayPal = (req, res, next) => {
  * GET /api/paypal/success
  * PayPal SDK example.
  */
-exports.getPayPalSuccess = (req, res) => {
-  const paymentId = req.session.paymentId;
-  const paymentDetails = { payer_id: req.query.PayerID };
-  paypal.payment.execute(paymentId, paymentDetails, (err) => {
-    res.render('api/paypal', {
-      result: true,
-      success: !err
-    });
+exports.getPayPalSuccess = function (req, res) {
+  var paymentId = req.session.paymentId;
+  var paymentDetails = { payer_id: req.query.PayerID };
+  paypal.payment.execute(paymentId, paymentDetails, function (err) {
+    if (err) {
+      res.render('/api/paypal', {
+        result: true,
+        success: false
+      });
+    } else {
+      res.render('api/paypal', {
+        result: true,
+        success: true
+      });
+    }
   });
 };
 
@@ -456,7 +72,7 @@ exports.getPayPalSuccess = (req, res) => {
  * GET /api/paypal/cancel
  * PayPal SDK example.
  */
-exports.getPayPalCancel = (req, res) => {
+exports.getPayPalCancel = function (req, res) {
   req.session.paymentId = null;
   res.render('api/paypal', {
     result: true,
@@ -464,88 +80,54 @@ exports.getPayPalCancel = (req, res) => {
   });
 };
 
-/**
- * GET /api/lob
- * Lob API example.
- */
-exports.getLob = (req, res, next) => {
-  lob.routes.list({ zip_codes: ['10007'] }, (err, routes) => {
-    if (err) { return next(err); }
-    res.render('api/lob', {
-      title: 'Lob API',
-      routes: routes.data[0].routes
+module.exports = function (app) {
+  // Using the passport.authenticate middleware with our local strategy.
+  // If the user has valid login credentials, send them to the members page.
+  // Otherwise the user will be sent an error
+  app.post("/api/login", passport.authenticate("local"), function (req, res) {
+    // Since we're doing a POST with javascript, we can't actually redirect that post into a GET request
+    // So we're sending the user back the route to the members page because the redirect will happen on the front end
+    // They won't get this or even be able to access this page if they aren't authed
+    res.json("/members");
+  });
+
+  // Route for signing up a user. The user's password is automatically hashed and stored securely thanks to
+  // how we configured our Sequelize User Model. If the user is created successfully, proceed to log the user in,
+  // otherwise send back an error
+  app.post("/api/signup", function (req, res) {
+    console.log(req.body);
+    db.User.create({
+      email: req.body.email,
+      password: req.body.password
+    }).then(function () {
+      res.redirect(307, "/api/login");
+    }).catch(function (err) {
+      console.log(err);
+      res.json(err);
+      // res.status(422).json(err.errors[0].message);
     });
   });
-};
 
-/**
- * GET /api/upload
- * File Upload API example.
- */
-
-exports.getFileUpload = (req, res) => {
-  res.render('api/upload', {
-    title: 'File Upload'
+  // Route for logging user out
+  app.get("/logout", function (req, res) {
+    req.logout();
+    res.redirect("/");
   });
-};
 
-exports.postFileUpload = (req, res) => {
-  req.flash('success', { msg: 'File was uploaded successfully.' });
-  res.redirect('/api/upload');
-};
-
-/**
- * GET /api/pinterest
- * Pinterest API example.
- */
-exports.getPinterest = (req, res, next) => {
-  const token = req.user.tokens.find(token => token.kind === 'pinterest');
-  request.get({ url: 'https://api.pinterest.com/v1/me/boards/', qs: { access_token: token.accessToken }, json: true }, (err, request, body) => {
-    if (err) { return next(err); }
-    res.render('api/pinterest', {
-      title: 'Pinterest API',
-      boards: body.data
-    });
-  });
-};
-
-/**
- * POST /api/pinterest
- * Create a pin.
- */
-exports.postPinterest = (req, res, next) => {
-  req.assert('board', 'Board is required.').notEmpty();
-  req.assert('note', 'Note cannot be blank.').notEmpty();
-  req.assert('image_url', 'Image URL cannot be blank.').notEmpty();
-
-  const errors = req.validationErrors();
-
-  if (errors) {
-    req.flash('errors', errors);
-    return res.redirect('/api/pinterest');
-  }
-
-  const token = req.user.tokens.find(token => token.kind === 'pinterest');
-  const formData = {
-    board: req.body.board,
-    note: req.body.note,
-    link: req.body.link,
-    image_url: req.body.image_url
-  };
-
-  request.post('https://api.pinterest.com/v1/pins/', { qs: { access_token: token.accessToken }, form: formData }, (err, request, body) => {
-    if (err) { return next(err); }
-    if (request.statusCode !== 201) {
-      req.flash('errors', { msg: JSON.parse(body).message });
-      return res.redirect('/api/pinterest');
+  // Route for getting some data about our user to be used client side
+  app.get("/api/user_data", function (req, res) {
+    if (!req.user) {
+      // The user is not logged in, send back an empty object
+      res.json({});
     }
-    req.flash('success', { msg: 'Pin created' });
-    res.redirect('/api/pinterest');
+    else {
+      // Otherwise send back the user's email and id
+      // Sending back a password, even a hashed password, isn't a good idea
+      res.json({
+        email: req.user.email,
+        id: req.user.id
+      });
+    }
   });
-};
 
-exports.getGoogleMaps = (req, res) => {
-  res.render('api/google-maps', {
-    title: 'Google Maps API'
-  });
 };
