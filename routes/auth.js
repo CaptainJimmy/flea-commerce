@@ -3,7 +3,7 @@ var router = express.Router();
 var models = require("../models");
 var passport = require("passport");
 var session = require("express-session");
-require("../config/passport/passport.js")(passport, Customer);
+var passport = require("./config/passport.js")(passport, Customer);
 router.get("/", (req, res, next) => {
     res.render("signup");
 });
