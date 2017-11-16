@@ -8,7 +8,7 @@ block content
         each item in product
           .card.col-lg-4.col-md-4.col-sm-6.col-xs-12.margBot.proCard
             img.card-img-top.item-photo.img-responsive( src= item.image)       
-            .card-block
+            .div
               p.phead= item.product_name       
                 p.pdes= item.product_description  
                 a.btn.btn-aqua.mb-2(href=`/product/${item.id}/`)
