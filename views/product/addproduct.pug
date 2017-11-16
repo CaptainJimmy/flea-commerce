@@ -1,0 +1,26 @@
+extends layout
+
+block content
+  .container
+    .jumbotron(style='margin-top: 100px; background-color: #fff; border: 1px solid #2C7873;')
+      .container
+        .row
+          .col-md-12
+            form#add-product-form(method="POST",action="/admin/addproduct")
+              h1.text-center Add A Product
+              .form-group
+                label(for='product_name') Product Name  
+                input#product_name.form-control(type='text',name="product_name",placeholder='Enter the Product Name as You Want Displayed')
+              .form-group
+                label(for='product_description') Product Details  
+                textarea#product_description.form-control(name="product_description",rows='3')
+              .form-group
+                label(for='image_URL') Photo URL   
+                input#image_URL.form-control(type='URL',name="image",placeholder='http://image.png')
+              .form-group
+                label(for='product_price') Price  
+                input#product_price.form-control(type='price',name="product_price",placeholder='$00.00')
+              .form-group
+                label(for='qty_on_hand') Quantity On Hand
+                input#qty_on_hand.form-control(type='text',name="qty_on_hand",placeholder='Quantity')
+              button.btn.btn-aqua.btn-block(type='submit') Submit
