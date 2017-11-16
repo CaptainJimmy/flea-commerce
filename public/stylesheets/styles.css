@@ -289,6 +289,19 @@ section {
 	font-size: 3.5rem;
 	font-weight: 400;
 }
+.aqua {
+	color: #6FB98F;
+	margin-right: 10px;
+}
+.white {
+	color: #fff;
+}
+.jumbTop {
+	margin-top: 88px;
+}
+.shadow {
+	text-shadow: 2px 2px 4px #000000;
+}
 /* Product Detail Page -----------------------------------------------------------------------------------------------*/
 
 ul > li{margin-right:25px;font-weight:lighter;cursor:pointer}
