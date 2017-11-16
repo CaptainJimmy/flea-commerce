@@ -4,12 +4,12 @@
 _**Concept:**_ A Lightweight, Easy To Deploy, Secure, Node/Express/Mysql E-Commerce Plugin Site,  The convenience and speed of pug/jade templating engine, combined with the JS style syntactical iterations make this extremely easy to work with.
 
 _**Server Side Technologies**_
-Linode Linux Deployed - https://herokublows.com
-NGINX Load balancing, reverse proxy
-ucf open source firewall
-Full SSL Certificate
-Hardened Linux Installation
-Google domain name services and DNS
+* Linode Linux Deployed - https://herokublows.com
+* NGINX Load balancing, reverse proxy
+* ucf open source firewall
+* Full SSL Certificate
+* Hardened Linux Installation
+* Google domain name services and DNS
 
 
 _**NPM Packages Featured**_ 
