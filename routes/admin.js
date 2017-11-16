@@ -57,16 +57,18 @@ router.get('/customers', (req, res, next) => {
 });
 
 router.get('/customers/:id', function(req, res, next) {
-    var cust = req.params.id;
 
     db.Customer.findOne({
         where: {
-            id: cust
+            id: req.params.id
         }
     }).then((data) => {
         res.render('admin', { consoleChoice: "false", adminType: "customers", adminCommand: "edit", customer: data });
-
-    });
+    }).error((error) => {
+        var err = new Error("Not Found");
+        err.status = 404;
+        next(err);
+    })
 });
 router.put('/customers/:id', (req, res, next) => {
     if (!req.params.id) {
@@ -80,10 +82,28 @@ router.put('/customers/:id', (req, res, next) => {
             }
         })
         .then((productsPost) => {
-            res.redirect('/admin/products/' + req.params.id);
+            res.json(productsPost);
         })
 });
 
+router.delete("/customers/:id", (req, res, next) => {
+    if (!req.params.id) {
+        var err = new Error("Not Found, No ID");
+        err.status = 404;
+        next(err);
+    }
+    db.Customer
+        .destroy({
+            where: {
+                id: req.params.id
+            }
+        })
+        .then((productsPost) => {
+            res.json(productsPost);
+        }).catch((err) => {
+            res.json(err)
+        });
+});
 router.get("/addproduct", function(req, res, next) {
     res.render("addproduct");
 });
