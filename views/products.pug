@@ -2,11 +2,12 @@ extends layout
 
 block content
   .container(style='margin-top: 88px;')
-    h3.ph3.text-center  Products 
+    h3.ph3.text-center  Products
+      hr 
       .row.col-lg-12  
         each item in product
           .card.col-lg-4.col-md-4.col-sm-6.col-xs-12.margBot.proCard
-            img.card-img-top.item-photo( src= item.image)       
+            img.card-img-top.item-photo.img-responsive( src= item.image)       
             .card-block
               p.phead= item.product_name       
                 p.pdes= item.product_description  
