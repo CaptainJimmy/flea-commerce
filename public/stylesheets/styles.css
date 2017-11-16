@@ -19,9 +19,6 @@ h4 {
 .parallax-section {
 	background-attachment: fixed!important;
 }
-.btn-capsul {
-	border-radius: 30px;
-}
 .btn-aqua {
 	background: #6FB98F;
 	color: #fff;
@@ -274,7 +271,24 @@ section {
 	max-width: 200px;
 	height: auto;
 }
-
+.proCard {
+	border: none;
+}
+.phead {
+	font-size: 24px;
+	font-weight: 400;
+	color: #2C7876;
+}
+.pdes {
+	font-size: 18px;
+}
+.pmini {
+	font-size: 14px;
+}
+.ph3 {
+	font-size: 3.5rem;
+	font-weight: 400;
+}
 /* Product Detail Page -----------------------------------------------------------------------------------------------*/
 
 ul > li{margin-right:25px;font-weight:lighter;cursor:pointer}

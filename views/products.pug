@@ -1,17 +1,17 @@
 extends layout
 
 block content
-  .container.mb-5(style='margin-top: 88px;')
-    h3.display-4.text-center  Products 
+  .container(style='margin-top: 88px;')
+    h3.ph3.text-center  Products 
       .row.col-lg-12  
         each item in product
-          .card.col-lg-4.col-md-4.col-sm-4.margBot
+          .card.col-lg-4.col-md-4.col-sm-6.col-xs-12.margBot.proCard
             img.card-img-top.item-photo( src= item.image)       
-            .card-block.p-3
-              h4.card-title= item.product_name       
-                p.card-text= item.product_description  
+            .card-block
+              p.phead= item.product_name       
+                p.pdes= item.product_description  
                 a.btn.btn-aqua.mb-2(href=`/product/${item.id}/`)
                   i.fa.fa-bars(aria-hidden='true')
-                  span  Product Details 
-                p.small Quantity Available: 
+                  span  Details 
+                p.pmini Quantity Available: 
                   span= item.qty_on_hand
