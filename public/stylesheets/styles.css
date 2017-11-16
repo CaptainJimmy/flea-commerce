@@ -274,18 +274,6 @@ section {
 	max-width: 200px;
 	height: auto;
 }
-.sp {
-	padding: 5px;
-}
-.item-photos {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-.footer {
-	position: absolute;
-	bottom: 0;
-}
 
 /* Product Detail Page -----------------------------------------------------------------------------------------------*/
 
