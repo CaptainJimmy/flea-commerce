@@ -6,7 +6,7 @@ block content
       .container
         .row
           .col-md-12
-            form#add-product-form(method="POST",action="/product/add")
+            form#add-product-form(method="POST",action="/admin/addproduct")
               h1.text-center Add A Product
               .form-group
                 label(for='product_name') Product Name  
@@ -18,7 +18,7 @@ block content
                 label(for='image_URL') Photo URL   
                 input#image_URL.form-control(type='URL',name="image",placeholder='http://image.png')
               .form-group
-                label(for='price') Price  
+                label(for='product_price') Price  
                 input#product_price.form-control(type='price',name="product_price",placeholder='$00.00')
               .form-group
                 label(for='qty_on_hand') Quantity On Hand

@@ -1,0 +1,23 @@
+extends layout
+
+block content
+    .container
+      .jumbotron(style='margin-top: 100px; background-color: #fff; border: 1px solid #2C7873;')
+        .container
+            .row.col-lg-12
+                .col-lg-5.col-xs-5.item-photo
+                    img(src= product.image)(style='width:300px;')        
+                .col-lg-7.col-xs-7(style='border:0px solid gray')
+                    h3= product.product_name        
+                    h6.title-price 
+                        small Price
+                        h3= product.product_price           
+                    .section(style='padding-bottom:20px;')
+                        h6.title-attr.margTop Quantity Available: 
+                            span= product.qty_on_hand                            
+                    .section
+                        button.btn.btn-aqua.margBot
+                            i.fa.fa-shopping-cart(aria-hidden='true')  Add to Cart
+                    .margTop
+                        h6 Product Details:         
+                            .p= product.product_description
