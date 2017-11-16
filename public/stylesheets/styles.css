@@ -19,9 +19,6 @@ h4 {
 .parallax-section {
 	background-attachment: fixed!important;
 }
-.btn-capsul {
-	border-radius: 30px;
-}
 .btn-aqua {
 	background: #6FB98F;
 	color: #fff;
@@ -274,19 +271,37 @@ section {
 	max-width: 200px;
 	height: auto;
 }
-.sp {
-	padding: 5px;
+.proCard {
+	border: none;
 }
-.item-photos {
-	display: flex;
-	justify-content: center;
-	align-items: center;
+.phead {
+	font-size: 24px;
+	font-weight: 400;
+	color: #2C7876;
 }
-.footer {
-	position: absolute;
-	bottom: 0;
+.pdes {
+	font-size: 18px;
 }
-
+.pmini {
+	font-size: 14px;
+}
+.ph3 {
+	font-size: 3.5rem;
+	font-weight: 400;
+}
+.aqua {
+	color: #6FB98F;
+	margin-right: 10px;
+}
+.white {
+	color: #fff;
+}
+.jumbTop {
+	margin-top: 88px;
+}
+.shadow {
+	text-shadow: 2px 2px 4px #000000;
+}
 /* Product Detail Page -----------------------------------------------------------------------------------------------*/
 
 ul > li{margin-right:25px;font-weight:lighter;cursor:pointer}

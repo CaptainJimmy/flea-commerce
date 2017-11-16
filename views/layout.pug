@@ -23,23 +23,56 @@ html
         .container
           button.navbar-toggler.navbar-toggler-right(type='button', data-toggle='collapse', data-target='#navbarCollapse1', aria-controls='navbarCollapse', aria-expanded='false', aria-label='Toggle navigation')
             span.navbar-toggler-icon    
-          a.navbar-brand.mx-auto(href='#')
+          a.navbar-brand.mx-auto(href='/')
             img(src='/images/flea-logo.png', style='max-width: 40px', ;='')
             span Flea-Commerce
           #navbarCollapse1.collapse.navbar-collapse
             ul.navbar-nav.ml-auto
               li.nav-item.active
-                a.nav-link(href='#') Home      
+                a.nav-link(href='/') Home      
               li.nav-item
-                a.nav-link(href='#') Shop Now      
+                a.nav-link(href='/product') Shop Now      
               li.nav-item
                 a.nav-link(href='#') Shopping Cart
     block content
 
-    section.action-sec.footer
+    |   
+    section#about.about-sec.parallax-section
+      .container
+        .row
+          .col-md-3
+            h2
+              small Who We Are
+              | About
+              br
+              | Us
+          |         
+          .col-md-4
+            p
+              | Flea-Commerce offers competitive prices and a varitey of products.
+            |           
+            p
+              | Flea-Commerce has easy returns! No problems, no hassles. We keep records of your transactions which makes it easier for you when dealing with the hussle and bussle of life.
+          |         
+          .col-md-4
+            p
+              | Flea-Commerce offers low shipping rates. As a matter of fact, orders over $50 ship for free!
+            |           
+            p
+              | And did we mentiont that Flea-Commerce is accessible at any time? But if you're reading this now, that means you're already here! So what are you waiting for?  Click that button! 
+            |           
+            p
+              a.btn.btn-transparent-white(href='/product') 
+                i.fa.fa-usd(aria-hidden='true')
+                |  Shop Now
+    section.action-sec
       .container
         .action-box.text-center
-          h2 
+          a.aqua(href='https://github.com/sahat/hackathon-starter') GitHub Project
+          a.aqua(href='https://github.com/sahat/hackathon-starter/issues') Issues
+          a.aqua(href='/contact') Contact
+          br
+          p.white
             img(src='/images/flea-logo.png', style='max-width: 30px', ;='')
-            span Flea-Commerce
+            span © 2017 FleaCommerce, Inc. All Rights Reserved
     script(src='/js/app2.js')
