@@ -11,13 +11,26 @@ block content
                     h3= product.product_name        
                     h6.title-price 
                         small Price
-                        h3= product.product_price           
+                        h3= '$ ' + product.product_price     
                     .section(style='padding-bottom:20px;')
                         h6.title-attr.margTop Quantity Available: 
                             span= product.qty_on_hand                            
                     .section
-                        button.btn.btn-aqua.margBot
-                            i.fa.fa-shopping-cart(aria-hidden='true')  Add to Cart
+                        form(target='paypal', action='https://www.paypal.com/cgi-bin/webscr', method='post')
+                            input(type='hidden', name='cmd', value='_cart')
+                            input(type='hidden', name='business', value='S7YKFRVZ8B8US')
+                            input(type='hidden', name='lc', value='US')
+                            input(type='hidden', name='item_name', value= product.product_name)
+                            input(type='hidden', name='item_number', value= product.id)
+                            input(type='hidden', name='amount', value= product.product_price)
+                            input(type='hidden', name='currency_code', value='USD')
+                            input(type='hidden', name='button_subtype', value='products')
+                            input(type='hidden', name='tax_rate', value='7.000')
+                            input(type='hidden', name='shipping', value='0.00')
+                            input(type='hidden', name='add', value='1')
+                            input(type='hidden', name='bn', value='PP-ShopCartBF:btn_cart_LG.gif:NonHosted')
+                            input(type='image', src='https://www.paypalobjects.com/en_US/i/btn/btn_cart_LG.gif', border='0', name='submit', alt='PayPal - The safer, easier way to pay online!')
+                            img(alt='', border='0', src='https://www.paypalobjects.com/en_US/i/scr/pixel.gif', width='1', height='1')
                     .margTop
                         h6 Product Details:         
                             .p= product.product_description
