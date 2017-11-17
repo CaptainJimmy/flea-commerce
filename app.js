@@ -5,7 +5,6 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var index = require('./routes/index');
-var user = require('./routes/user');
 var admin = require("./routes/admin");
 var customer = require('./routes/customer');
 var product = require('./routes/product')
@@ -14,7 +13,6 @@ var passport = require('passport');
 var session = require('express-session');
 var env = require("dotenv").load();
 var models = require("./models");
-var authRoute = require("./routes/auth.js");
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -28,10 +26,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '/public')));
 app.use('/', index);
-app.use('/user', user);
 app.use('/customer', customer);
 app.use('/product', product);
-app.use('/test', authRoute);
 app.use('/admin', admin);
 
 // For Passport

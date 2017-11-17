@@ -19,7 +19,6 @@ router.get('/products', (req, res, next) => {
 });
 router.get('/products/:id', (req, res, next) => {
     var prod = req.params.id;
-    console.log(prod)
     db.Product.findOne({
         where: {
             id: prod
@@ -127,15 +126,8 @@ router.get("/addproduct", function(req, res, next) {
 });
 // Product route for saving a new Product
 router.post("/addproduct", function(req, res) {
-    console.log(req.body);
     db.Product
         .create(req.body, {})
-        //     product_name: req.body.product_name,
-        //     product_description: req.body.product_description,
-        //     product_price: req.body.product_price,
-        //     qty_on_hand: req.body.qty_on_hand,
-        //     image: req.body.image
-        // })
         .then(function(dbProduct) {
             res.redirect("products");
         });
