@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "root",
-    "password": null,
+    "password": "root",
     "database": "flea_commerce",
     "host": "localhost",
     "dialect": "mysql",

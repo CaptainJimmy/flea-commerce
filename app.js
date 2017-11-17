@@ -8,7 +8,8 @@ var index = require('./routes/index');
 var user = require('./routes/user');
 var admin = require("./routes/admin");
 var customer = require('./routes/customer');
-var product = require('./routes/product')
+var product = require('./routes/product');
+var checkout = require('./routes/checkout');
 var app = express();
 var passport = require('passport');
 var session = require('express-session');
@@ -33,6 +34,7 @@ app.use('/customer', customer);
 app.use('/product', product);
 app.use('/test', authRoute);
 app.use('/admin', admin);
+app.use('/checkout', checkout);
 
 // For Passport
 
