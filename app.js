@@ -35,12 +35,6 @@ app.use('/test', authRoute);
 app.use('/admin', admin);
 
 // For Passport
-app.use(session({ secret: 'keyboard cat', resave: true, saveUninitialized: true })); // session secret
-app.use(passport.initialize());
-app.use(passport.session()); // persistent login sessions
-
-
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
