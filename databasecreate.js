@@ -5,7 +5,7 @@ db.Product.create({
     product_description: "Echo Dot (2nd Generation) - Black",
     product_price: 36.29,
     qty_on_hand: 10,
-    image: "https://www.bhphotovideo.com/images/images2000x2000/amazon_b01dfkc2so_echo_dot_black_1282300.jpg"
+    image: "https://target.scene7.com/is/image/Target/52132692?wid=520&hei=520&fmt=pjpeg"
 });
 db.Product.create({
     product_name: "Xbox 360",
@@ -40,7 +40,7 @@ db.Product.create({
     product_description: "NETGEAR Nighthawk AC1750 Smart Dual Band WiFi Router (R6700)",
     product_price: 69.03,
     qty_on_hand: 15,
-    image: "images-na.ssl-images-amazon.com/images/I/41vwx7bqtrL._SL500_AC_SS350_.jpg"
+    image: "http://snpi.dell.com/snp/images2/300/en-us~392d4760-8e15-4763-bfb6-9d595f0e3f95/392d4760-8e15-4763-bfb6-9d595f0e3f95.jpg"
 });
 db.Product.create({
     product_name: "Samsung Gear S3",

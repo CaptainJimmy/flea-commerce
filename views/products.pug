@@ -7,11 +7,11 @@ block content
       .row.col-lg-12  
         each item in product
           .card.col-lg-4.col-md-4.col-sm-6.col-xs-12.margBot.proCard
-            img.card-img-top.item-photo.img-responsive( src= item.image)       
+            img.img-responsive( src= item.image)(style='height: 200px;')         
             .div
-              p.phead= item.product_name       
-                p.pdes= item.product_description  
-                a.btn.btn-aqua.mb-2(href=`/product/${item.id}/`)
+              p.pdes= item.product_name 
+                br       
+                a.btn.btn-aqua(href=`/product/${item.id}/`)
                   i.fa.fa-bars(aria-hidden='true')
                   span  Details 
                 p.pmini Quantity Available: 
