@@ -19,39 +19,27 @@ module.exports = function(sequelize, DataTypes) {
         },
         username: {
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: false
         },
         ship_to_address1: {
             type: DataTypes.STRING,
-            allowNull: false,
-            validate: {
-                len: [1]
-            }
+            allowNull: false
         },
         ship_to_address2: {
             type: DataTypes.STRING,
-            allowNull: true,
+            allowNull: true
         },
         ship_to_state: {
             type: DataTypes.STRING,
-            allowNull: false,
-            validate: {
-                len: [2, 2]
-            }
+            allowNull: false
         },
         ship_to_zip: {
             type: DataTypes.STRING,
-            allowNull: false,
-            validate: {
-                len: [5, 5]
-            }
+            allowNull: false
         },
         email: {
             type: DataTypes.STRING,
-            allowNull: false,
-            validate: {
-                isEmail: true
-            }
+            allowNull: false
         },
         date_ordered: {
             type: DataTypes.DATE,
