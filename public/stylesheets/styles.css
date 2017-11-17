@@ -274,14 +274,9 @@ section {
 .proCard {
 	border: none;
 }
-.phead {
-	font-size: 24px;
-	font-weight: 400;
-	color: #2C7876;
-}
 .pdes {
 	font-size: 18px;
-	padding: 10px 0;
+	margin-top: 10px;
 }
 .pmini {
 	font-size: 14px;
@@ -303,10 +298,6 @@ section {
 .shadow {
 	text-shadow: 2px 2px 4px #000000;
 }
-.blah {
-	max-width: 200px;
-	max-height: 100%;
-}
 .out {
 	background-color: #fff; 
 	border: 2px solid #004445;
@@ -315,6 +306,9 @@ section {
 	font-size: 2.5rem;
     font-weight: 300;
     line-height: 1.2;
+}
+.btn-pro {
+	margin: 10px 0 0 0; 
 }
 /* Product Detail Page -----------------------------------------------------------------------------------------------*/
 
