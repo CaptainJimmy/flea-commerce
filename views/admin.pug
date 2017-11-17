@@ -1,14 +1,14 @@
 extends layout
 
 block content
-  .container.mb-5(style='margin-top: 88px;')
+  .container.mb-5.jumbTop
     h3.display-4.text-center  Admin Console
     .container            
         if (consoleChoice === "true")
-            .jumbotron
-                h1 Choose A Role:
+            .jumbotron.text-center.out
+                h6.display-4 Choose A Role:
                 br
-                a(href="/admin/products")
+                a(href="/admin/products")(style="margin-right: 10px;")
                     button.btn.btn-aqua Edit Products
                 a(href="/admin/customers")
                     button.btn.btn-aqua Edit Customers
@@ -16,8 +16,8 @@ block content
         else if (consoleChoice === "false")
             if (adminType === "products")
                 if ( adminCommand === "showAll" )
-                    .jumbotron
-                        h1.text-center Show All Products
+                    .jumbotron.out
+                        h6.display-4.text-center Displaying All Products
                     .container
                         each item in product
                             .card
@@ -29,8 +29,9 @@ block content
                                     a.btn.btn-aqua(href=`/admin/products/${item.id}/`) Edit This Product
                 
                 else if (adminCommand === "edit")
-                    .jumbotron#div1
-                        h1.text-center Edit Product
+                    #div1
+                        h4.display-45(style='margin-left: 15px;') Edit Product
+                        hr
                     .container
                         form#edit-product
                             .form-group
