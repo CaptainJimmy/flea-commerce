@@ -19,27 +19,27 @@ module.exports = function(sequelize, DataTypes) {
         },
         username: {
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: false
         },
         ship_to_address1: {
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: false
         },
         ship_to_address2: {
             type: DataTypes.STRING,
-            allowNull: true,
+            allowNull: true
         },
         ship_to_state: {
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: false
         },
         ship_to_zip: {
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: false
         },
         email: {
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: false
         },
         date_ordered: {
             type: DataTypes.DATE,
@@ -62,7 +62,7 @@ module.exports = function(sequelize, DataTypes) {
     Order.associate = function(models) {
         Order.belongsTo(models.Customer, { foreignKey: 'customer_id' });
         Order.hasMany(models.Product, { foreignKey: 'order_id' });
-        Order.hasOne(models.Admin, { through: 'Shipped', foreignKey: 'order_id' });
+        Order.hasOne(models.User, { through: 'Shipped', foreignKey: 'order_id' });
     }
     return Order;
 };
