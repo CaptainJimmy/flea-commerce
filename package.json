@@ -22,7 +22,6 @@
     "passport-http": "^0.3.0",
     "passport-local": "^1.0.0",
     "passport-oauth2-client-password": "^0.1.2",
-    "paypal-rest-sdk": "^1.7.1",
     "pug": "2.0.0-beta11",
     "sequelize": "^4.22.5",
     "sequelize-cli": "^3.0.0",

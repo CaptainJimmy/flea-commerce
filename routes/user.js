@@ -1,24 +1,23 @@
 var express = require('express');
 var router = express.Router();
-var user = require("../models/user");
+var db = require("../models");
+var passport = require("passport");
+var session = require("express-session");
+//var authRoute = require("./auth.js")(app);
 
+/* GET users listing. */
 router.get('/', function(req, res, next) {
-    if (req.user) {
-        res.redirect("/customer");
-    }
-    res.send('/signup');
+    res.send('error');
+});
+router.get('/authenticate', function(req, res, next) {
+    res.send('error');
+});
+router.post("/create", function(req, res, next) {
+    res.send("error");
 });
 
-router.get('/login', function(req, res, next) {
-    if (req.user) {
-        res.redirect("/customer");
-    }
-    res.send('/login');
-});
 
-router.get('/customer', isAuthenticated, function (req, res, next) {
-    res.render('/customer');
-});
+
 
 module.exports = router;
 

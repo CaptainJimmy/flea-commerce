@@ -4,22 +4,17 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var app = express();
-var session = require('express-session');
-var passport = require("./config/passport");
-var env = require("dotenv").load();
-var models = require("./models");
-
-
-// Routes
 var index = require('./routes/index');
 var user = require('./routes/user');
 var admin = require("./routes/admin");
 var customer = require('./routes/customer');
-var product = require('./routes/product');
-var checkout = require('./routes/checkout');
-var contact = require('./routes/contact');
-var api = require('./routes/api');
+var product = require('./routes/product')
+var app = express();
+var passport = require('passport');
+var session = require('express-session');
+var env = require("dotenv").load();
+var models = require("./models");
+var authRoute = require("./routes/auth.js");
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -34,14 +29,10 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '/public')));
 app.use('/', index);
 app.use('/user', user);
-app.use('/admin', admin);
 app.use('/customer', customer);
 app.use('/product', product);
-app.use('/checkout', checkout);
 app.use('/test', authRoute);
-app.use('/contact', contact);
-app.use('/api', api);
-
+app.use('/admin', admin);
 
 // For Passport
 app.use(session({ secret: 'keyboard cat', resave: true, saveUninitialized: true })); // session secret
