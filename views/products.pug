@@ -7,14 +7,13 @@ block content
     - var i = -3;
     while i <= product.length
       - i += 3;
-        .row.row-eq-height.m-3  
+        .row.row-eq-height.m-3
           each item in product.slice(i, i+3)
             .col-sm
               .card.p-3
-                img( src= item.image)(style='height: 200px;')         
+                img.img-responsive( src= item.image)(style='max-height:200px;')         
                 .div
-                  p.pdes= item.product_name
-                  br        
+                  p.pdes= item.product_name     
                   a.btn.btn-aqua.btn-pro(href=`/product/${item.id}/`)
                     i.fa.fa-bars(aria-hidden='true')
                     span  Details 
