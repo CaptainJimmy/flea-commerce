@@ -10,8 +10,10 @@ block content
                 br
                 a(href="/admin/products")(style="margin-right: 10px;")
                     button.btn.btn-aqua Edit Products
-                a(href="/admin/customers")
+                a(href="/admin/customers")(style="margin-right: 10px;")
                     button.btn.btn-aqua Edit Customers
+                a(href="/admin/addproduct")
+                    button.btn.btn-aqua Add Products
             
         else if (consoleChoice === "false")
             if (adminType === "products")
